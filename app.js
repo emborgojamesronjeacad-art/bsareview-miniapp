@@ -1,863 +1,818 @@
 
-// =============================================
-// BSA REVIEW - APP.JS
-// Six subjects, 300 practice questions
-// =============================================
+const questionBank = {
+  "Soil Science": [
+    ["Soil texture", "The relative proportions of sand, silt, and clay"],
+    ["Soil structure", "The arrangement of soil particles into aggregates or peds"],
+    ["Soil porosity", "The fraction of soil volume occupied by pores"],
+    ["Bulk density", "The oven-dry mass of soil per unit of its total volume"],
+    ["Particle density", "The mass of soil solids per unit volume of the solids"],
+    ["Field capacity", "The water content remaining after rapid gravitational drainage"],
+    ["Permanent wilting point", "The water content at which plants cannot recover turgidity"],
+    ["Available water capacity", "The soil water held between field capacity and permanent wilting point"],
+    ["Infiltration", "The entry of water through the soil surface"],
+    ["Percolation", "The downward movement of water through soil"],
+    ["Cation exchange capacity", "The capacity of soil to retain and exchange positively charged ions"],
+    ["Base saturation", "The percentage of exchange sites occupied by basic cations"],
+    ["Soil pH", "A measure related to hydrogen-ion activity in soil solution"],
+    ["Acid soil", "Soil with a pH below 7, commonly associated with greater hydrogen-ion activity"],
+    ["Liming", "The application of materials that neutralize soil acidity"],
+    ["Saline soil", "Soil with excessive soluble salts that restrict plant water uptake"],
+    ["Sodic soil", "Soil with excessive exchangeable sodium that can disperse clay"],
+    ["Soil organic matter", "Decomposed and partly decomposed plant, animal, and microbial residues"],
+    ["Humus", "The relatively stable, dark fraction of soil organic matter"],
+    ["Mineralization", "The conversion of organic nutrients into inorganic forms"],
+    ["Immobilization", "The incorporation of inorganic nutrients into microbial organic compounds"],
+    ["Nitrification", "The microbial oxidation of ammonium to nitrite and then nitrate"],
+    ["Denitrification", "The microbial reduction of nitrate to gaseous nitrogen forms under low oxygen"],
+    ["Ammonification", "The conversion of organic nitrogen into ammonium"],
+    ["Leaching", "The removal of soluble substances downward with percolating water"],
+    ["Erosion", "The detachment and transport of soil by water, wind, or other agents"],
+    ["Soil conservation", "The management of land to limit soil loss and maintain productivity"],
+    ["Contour farming", "Cultivation along elevation contours to slow runoff"],
+    ["Terracing", "The construction of level or graded steps on sloping land to control runoff"],
+    ["Cover crop", "A crop grown primarily to protect and improve soil rather than for harvest"],
+    ["Green manure", "Plant material incorporated into soil to add organic matter and nutrients"],
+    ["Soil compaction", "The reduction of pore space caused by pressure on soil"],
+    ["Soil tilth", "The physical condition of soil in relation to tillage and seedling growth"],
+    ["Soil horizon", "A distinct layer in a soil profile with characteristic properties"],
+    ["Eluviation", "The removal of clay, iron, or other materials from a soil horizon"],
+    ["Illuviation", "The accumulation of materials transported from overlying horizons"],
+    ["Parent material", "The geological material from which soil develops"],
+    ["Residual soil", "Soil formed in place from the underlying weathered material"],
+    ["Alluvial soil", "Soil developed from sediment deposited by flowing water"],
+    ["Laterization", "Intense weathering and leaching that leaves iron and aluminum oxides"],
+    ["Soil water tension", "The force with which soil holds water against extraction"],
+    ["Matric potential", "The component of water potential caused by attraction to soil surfaces"],
+    ["Capillary rise", "The upward movement of water through small pores due to capillary forces"],
+    ["Hydraulic conductivity", "The ability of soil to transmit water under a hydraulic gradient"],
+    ["Drainage", "The removal of excess water from soil"],
+    ["Redoximorphic features", "Soil colors and patterns formed by alternating reduction and oxidation"],
+    ["Soil colloids", "Very small clay and organic particles with large reactive surface areas"],
+    ["Isomorphic substitution", "Replacement of one ion by another in a clay mineral lattice without major structural change"],
+    ["Phosphate fixation", "The conversion of soluble phosphorus into less available forms in soil"],
+    ["Rhizosphere", "The soil region directly influenced by root activity and exudates"]
+  ],
 
-const subjectDefinitions = [
-  {
-    id: 1,
-    name: "Agricultural Extension and Communication",
-    icon: "📢",
-    concepts: [
-      ["Agricultural extension", "Education and advisory services that help farmers improve practices and livelihoods", ["A system for classifying rocks", "A method for breeding livestock", "A process for grading grain"]],
-      ["Communication", "The exchange of information and meaning between people", ["The movement of soil particles", "The storage of animal feed", "The classification of crops"]],
-      ["Feedback", "The receiver's response to a message", ["The original sender", "A type of fertilizer", "The communication equipment"]],
-      ["Extension demonstration", "A practical presentation showing how to perform a recommended practice", ["A market price list", "A soil classification chart", "A livestock pedigree"]],
-      ["Farm visit", "An extension method that provides advice directly at a farmer's location", ["A national television broadcast", "A seed certification label", "A commodity auction"]],
-      ["Field day", "An organized event where farmers observe practices and results in the field", ["A method of animal vaccination", "A soil erosion process", "A financial statement"]],
-      ["Extension evaluation", "Assessment of whether an extension program achieved its objectives", ["The grading of harvested seed only", "The classification of insects", "The measurement of rainfall alone"]],
-      ["Needs assessment", "A process for identifying community problems, priorities, and learning needs", ["A process for setting national borders", "A method of breeding plants", "A type of irrigation"]],
-      ["Participatory extension", "An approach that involves farmers in decisions and problem-solving", ["An approach that excludes farmers", "A method using only television", "A system without feedback"]],
-      ["Innovation diffusion", "The process through which new ideas and practices spread in a social system", ["The spread of soil erosion only", "The transport of fertilizer", "The storage of grain"]],
-      ["Early adopter", "A person who adopts an innovation relatively early", ["A person who always adopts last", "A person who cannot receive information", "A person who never evaluates practices"]],
-      ["Method demonstration", "A demonstration that teaches the steps of performing a practice", ["A report of national production", "A list of market prices", "A financial audit"]],
-      ["Result demonstration", "A demonstration that shows the outcome of a recommended practice", ["A lesson on writing letters", "A farm boundary survey", "A livestock vaccination record"]],
-      ["Mass communication", "Communication that can reach a large audience through media", ["A private conversation only", "A single farm inspection", "A one-to-one interview"]],
-      ["Interpersonal communication", "Direct communication between individuals", ["A nationwide radio broadcast", "A public billboard", "A newspaper advertisement"]],
-      ["Communication barrier", "A factor that interferes with accurate understanding of a message", ["Clear language", "Active listening", "Useful feedback"]],
-      ["Visual aid", "A picture, chart, or poster used to help explain information", ["A spoken conversation only", "A telephone call", "An audio-only recording"]],
-      ["Adult learning", "Learning that often builds on experience and practical problems", ["Learning without a purpose", "Avoiding previous experience", "Memorizing without understanding"]],
-      ["Training needs assessment", "Identification of gaps in knowledge, skills, or performance", ["A list of farm boundaries", "A crop marketing contract", "A livestock breeding calendar"]],
-      ["SMART objective", "An objective that is Specific, Measurable, Achievable, Relevant, and Time-bound", ["A target without a deadline", "An objective without measurements", "A goal unrelated to needs"]],
-      ["Monitoring", "Regular tracking of activities, resources, and progress", ["An activity done only before a project", "The grading of seed", "The process of setting farm prices"]],
-      ["Baseline survey", "A survey documenting conditions before a project or intervention", ["A final examination only", "A market advertisement", "A crop disease treatment"]],
-      ["Extension agent", "A professional who connects agricultural knowledge with farmers' needs", ["A plant pathogen", "A livestock feed ingredient", "A soil mineral"]],
-      ["Farmer organization", "A group that supports collective learning, cooperation, or marketing", ["A type of crop disease", "A soil horizon", "A chemical pesticide"]],
-      ["ICT in agriculture", "Digital technologies used to access, process, and communicate agricultural information", ["A method of soil compaction", "A crop variety", "A livestock reproductive organ"]],
-      ["Agricultural advisory service", "Guidance that helps farmers make informed production and management decisions", ["A guaranteed-profit contract", "A type of pesticide", "A method of soil formation"]],
-      ["Extension campaign", "Coordinated communication activities promoting a particular practice or message", ["A single unplanned conversation", "A seed germination test", "A livestock ration"]],
-      ["Local knowledge", "Knowledge developed through people's experience and practices in their community", ["Knowledge that is always incorrect", "A type of fertilizer", "A communication device"]],
-      ["Active listening", "Listening carefully to understand a speaker and respond appropriately", ["Interrupting continuously", "Ignoring the speaker", "Repeating information without listening"]],
-      ["Communication channel", "The medium through which a message travels", ["The person who receives a message", "The meaning of a message", "The response to a message"]],
-      ["Extension objective", "A clearly stated result an extension activity aims to achieve", ["A list of unrelated activities", "A farm boundary", "A market price"]],
-      ["Adoption", "The decision to begin and continue using an innovation or practice", ["The rejection of all new ideas", "The movement of soil", "The harvesting of grain"]],
-      ["Trialability", "The extent to which an innovation can be tested on a limited basis", ["The price of a tractor", "The color of a crop", "The weight of a seed"]],
-      ["Observability", "The extent to which results of an innovation can be seen by others", ["The amount of fertilizer in a bag", "The length of a farm road", "The cost of irrigation"]],
-      ["Compatibility", "The degree to which an innovation fits existing needs, values, and practices", ["The number of posters printed", "The weight of harvested produce", "The distance to a market"]],
-      ["Complexity of innovation", "The degree to which an innovation is perceived as difficult to understand or use", ["Its selling price alone", "The number of farmers in a province", "The size of an office"]],
-      ["Community participation", "The involvement of community members in planning and implementing activities", ["Excluding local people", "Making all decisions without consultation", "Preventing feedback"]],
-      ["Extension planning", "The process of setting objectives, activities, resources, and timelines", ["The random distribution of inputs", "The destruction of farm records", "The sale of livestock"]],
-      ["Outcome indicator", "A measure showing changes associated with a program's results", ["A list of office furniture", "The number of pages in a report", "The color of a poster"]],
-      ["Output indicator", "A measure of the direct products or services delivered by a program", ["A long-term social change only", "A crop disease", "A soil texture class"]],
-      ["Gender-responsive extension", "Extension that considers different people's needs, access, and participation", ["A service that excludes certain farmers", "A method of soil testing", "A system for grading livestock"]],
-      ["Inclusive communication", "Communication designed to be accessible and understandable to different audiences", ["Using only unexplained jargon", "Avoiding local languages", "Ignoring accessibility"]],
-      ["Farmer field school", "A participatory learning approach using field observation and practical exercises", ["A commodity warehouse", "A fertilizer factory", "A crop disease"]],
-      ["Communication ethics", "Principles that guide honest, responsible, and respectful communication", ["Exaggerating results", "Hiding important risks", "Sharing private information without permission"]],
-      ["Agricultural information", "Knowledge and data relevant to agricultural decisions", ["Only personal opinions", "Only unrelated entertainment", "Information that cannot be used"]],
-      ["Extension feedback loop", "A process in which responses inform later communication and program improvement", ["A one-way message with no response", "A crop rotation pattern", "A market monopoly"]],
-      ["Demonstration plot", "A designated area used to show crop practices or technologies", ["A livestock quarantine facility", "A grain pricing chart", "A soil horizon"]],
-      ["Problem diagnosis", "Systematic identification of the causes of an agricultural problem", ["Choosing a solution without investigation", "Ignoring observations", "Guessing a market price"]],
-      ["Program sustainability", "The ability of useful program benefits or activities to continue over time", ["Ending all activities immediately", "Spending all resources without planning", "Avoiding community ownership"]],
-      ["Evidence-based recommendation", "Advice supported by credible information, observations, or research", ["An unverified claim", "A guaranteed-profit promise", "An instruction without supporting evidence"]]
-    ]
-  },
-  {
-    id: 2,
-    name: "Agricultural Economics and Marketing",
-    icon: "📈",
-    concepts: [
-      ["Agricultural economics", "The study of how scarce resources are allocated in agriculture", ["The anatomy of livestock", "The classification of insects", "The structure of plant roots"]],
-      ["Opportunity cost", "The value of the next-best alternative forgone", ["The total sales revenue", "The amount of rainfall", "The number of farm workers"]],
-      ["Law of demand", "Quantity demanded generally falls as price rises, other things equal", ["Demand always rises with price", "Demand never responds to price", "Supply always becomes zero"]],
-      ["Law of supply", "Quantity supplied generally rises as price rises, other things equal", ["Supply always falls as price rises", "Supply is unrelated to price", "Supply is always zero"]],
-      ["Market equilibrium", "The point at which quantity demanded equals quantity supplied", ["A market with no buyers", "A market where everything is free", "A market with no production"]],
-      ["Fixed cost", "A cost that remains constant over the relevant production range", ["A cost that changes with every unit", "The revenue from sales", "The quantity of harvest"]],
-      ["Variable cost", "A cost that changes with the level of production or activity", ["A fixed annual land purchase", "A cost that never changes", "The market value of a crop"]],
-      ["Total revenue", "Selling price per unit multiplied by quantity sold", ["Total cost plus profit", "Fixed cost minus variable cost", "Total labor divided by acreage"]],
-      ["Profit", "Total revenue minus total cost", ["Total revenue plus total cost", "Total cost multiplied by acreage", "The total quantity produced"]],
-      ["Gross margin", "Revenue minus specified variable costs", ["Total revenue minus all fixed and variable costs in every definition", "Fixed costs plus taxes", "Quantity sold divided by price"]],
-      ["Price elasticity of demand", "The responsiveness of quantity demanded to a price change", ["The total area planted", "The weight of harvested grain", "The quantity of fertilizer used"]],
-      ["Production function", "The relationship between inputs used and output produced", ["A list of market prices", "A soil profile", "A livestock pedigree"]],
-      ["Marginal product", "The additional output from one more unit of an input", ["Total cost of all inputs", "The selling price", "The farm's land area"]],
-      ["Diminishing marginal returns", "Additional output from extra input eventually declines when other inputs are fixed", ["Output always falls immediately", "All inputs become free", "Output never changes"]],
-      ["Capital resource", "A produced resource used to produce other goods, such as a tractor", ["Natural sunlight", "Rainfall", "A farmer's physical effort alone"]],
-      ["Agricultural marketing", "Activities that move agricultural products from producers toward consumers", ["Growing crops without distribution", "Testing soil pH only", "Breeding animals only"]],
-      ["Marketing margin", "The price difference between marketing stages for comparable products and units", ["The total area planted", "The amount of seed used", "The number of farm workers"]],
-      ["Agricultural cooperative", "A member-owned organization established for members' mutual benefit", ["A type of fertilizer", "A plant disease", "A soil classification"]],
-      ["Value addition", "Increasing product value through processing, grading, packaging, or services", ["Intentionally increasing spoilage", "Reducing quality without reason", "Avoiding all processing"]],
-      ["Product grading", "Classifying products according to defined quality characteristics", ["Measuring rainfall", "Counting farm workers", "Testing livestock fertility"]],
-      ["Storage", "Keeping products under suitable conditions to preserve quality and manage selling time", ["Increasing spoilage", "Eliminating all demand", "Preventing all price changes"]],
-      ["Supply chain", "The network moving products from input suppliers through production and distribution", ["A list of crop diseases", "A farm boundary map", "A livestock vaccination"]],
-      ["Market intermediary", "A participant such as a trader, wholesaler, or retailer between sellers and buyers", ["A soil nutrient", "A seed variety", "A plant root"]],
-      ["Comparative advantage", "The ability to produce a good at a lower opportunity cost", ["Producing everything at the highest cost", "Avoiding specialization", "Selling without considering alternatives"]],
-      ["Inflation", "A sustained increase in the general price level", ["A decrease in all prices", "An increase in rainfall", "A decline in soil fertility"]],
-      ["Depreciation", "The reduction in an asset's value over its useful life", ["An increase in soil nutrients", "An increase in farm output", "A rise in crop yield"]],
-      ["Farm budget", "An estimate of expected farm income and expenses", ["A rainfall record alone", "A list of animal breeds", "A soil classification chart"]],
-      ["Break-even point", "The production or sales level at which total revenue equals total cost", ["The point of maximum rainfall", "The highest fixed cost", "The point of zero production in every case"]],
-      ["Production risk", "Uncertainty arising from yields, weather, pests, and production conditions", ["A guaranteed profit", "A fixed outcome", "A certain price in every market"]],
-      ["Farm diversification", "Using different crops or enterprises to spread risk and use resources", ["Planting only one crop forever", "Eliminating farm records", "Selling only to one buyer by necessity"]],
-      ["Contract farming", "An arrangement setting production or marketing terms between farmers and buyers", ["A system without any agreement", "A soil sampling method", "A plant disease"]],
-      ["Futures contract", "A standardized agreement traded for future delivery or financial settlement", ["A method of measuring crop height", "A seed variety", "A soil nutrient"]],
-      ["Consumer surplus", "The difference between consumers' willingness to pay and the price they pay", ["Total farm labor costs", "Producer fixed costs", "The value of unused fertilizer"]],
-      ["Producer surplus", "The difference between the price received and minimum acceptable price across units sold", ["The amount of rainfall", "The number of imported tractors", "The total unsold stock"]],
-      ["Public good", "A good that is generally non-excludable and non-rival in consumption", ["A product only one person can use and exclude others from", "A product sold only at auction", "An imported commodity"]],
-      ["Subsidy", "Financial assistance provided by a government or another institution", ["A penalty for producing crops", "A soil amendment", "A fee paid only by consumers"]],
-      ["Gross domestic product", "The value of final goods and services produced within a country over a period", ["The number of farms only", "The price of one crop", "The rainfall in a province"]],
-      ["Agricultural credit", "Borrowed funds used for agricultural production or related activities", ["A crop rotation method", "A vaccination", "A soil classification"]],
-      ["Working capital", "Funds and short-term resources used for day-to-day operations", ["The market value of farmland alone", "The annual rainfall", "The number of farm buildings"]],
-      ["Inventory management", "Managing input and product stocks to meet needs and control costs", ["Planting crops at random", "Setting interest rates", "Breeding livestock only"]],
-      ["Value chain", "The linked activities that add value as a product moves toward consumers", ["A method of measuring crop height", "An animal disease classification", "A rainfall schedule"]],
-      ["Market information", "Information that helps farmers make informed production and selling decisions", ["A guarantee of fixed profit", "A method of eliminating all price changes", "A replacement for transportation"]],
-      ["Land opportunity cost", "The value of the best alternative use of land that is forgone", ["The rainfall on the land", "The color of the soil", "The number of workers"]],
-      ["Economies of scale", "Lower average costs as production expands over a relevant range", ["Higher average costs in every case", "A decrease in yield from drought", "The absence of specialization"]],
-      ["Monopsony", "A market structure with one dominant buyer", ["A market with many buyers", "A market with no sellers", "A market with no producers"]],
-      ["Postharvest loss", "A reduction in quantity or quality after harvest", ["An increase in demand", "An increase in planted area", "An increase in labor productivity"]],
-      ["Grain drying", "Reducing grain moisture to a safe level for storage", ["Adding water to harvested grain", "Mixing clean grain with infested grain", "Leaving grain exposed to rain"]],
-      ["Price information", "Current or recent price data for relevant markets and products", ["A soil nutrient measurement", "A livestock gestation record", "A seed germination method"]],
-      ["Market segmentation", "Dividing buyers into groups with similar needs or characteristics", ["Mixing all products without classification", "Eliminating customer differences", "Measuring soil texture"]],
-      ["Competitive market", "A market with enough buyers and sellers to limit individual market power", ["A market with only one seller by definition", "A market without buyers", "A market with no price signals"]],
-      ["Cost-benefit analysis", "Comparing expected benefits with costs to evaluate an activity", ["Measuring only rainfall", "Counting animals without evaluating costs", "Classifying soil horizons"]]
-    ]
-  },
-  {
-    id: 3,
-    name: "Animal Science",
-    icon: "🐄",
-    concepts: [
-      ["Animal science", "The study of livestock biology, breeding, nutrition, management, and products", ["The study of stars", "The study of soil horizons", "The study of ocean currents"]],
-      ["Ruminant", "An animal with a specialized stomach and microbial fermentation, such as cattle", ["A chicken", "A tilapia", "A monogastric animal such as a pig"]],
-      ["Ruminant stomach", "The typical adult cattle stomach has four compartments", ["One compartment", "Two compartments", "Three compartments"]],
-      ["Abomasum", "The true stomach of a ruminant", ["The main fermentation chamber", "The organ that produces eggs", "The urinary bladder"]],
-      ["Rumen", "The main fermentation chamber where microbes digest fibrous feed", ["The organ that filters urine", "The animal's lung", "The reproductive tract"]],
-      ["Carbohydrates in feed", "A major source of energy for livestock", ["A type of vaccine", "A parasite", "A mineral only"]],
-      ["Protein in feed", "Supplies amino acids needed for growth and tissue repair", ["Provides no nutrients", "Is always toxic", "Replaces all water requirements"]],
-      ["Colostrum", "The first milk after birth, rich in antibodies and nutrients", ["A type of pasture", "A livestock parasite", "A mineral block"]],
-      ["Calving", "The process of giving birth in cattle", ["Egg incubation", "Shearing wool", "Weaning piglets"]],
-      ["Artificial insemination", "Introducing semen into the female reproductive tract by artificial means", ["Natural grazing", "Measuring body weight", "Removing horns"]],
-      ["Estrus", "The period when a female is sexually receptive", ["A digestion stage", "A feed deficiency", "An egg incubation method"]],
-      ["Gestation", "The period of pregnancy", ["The period between milkings", "The growth of wool", "The digestion of feed"]],
-      ["Cattle gestation", "Approximately 283 days in cattle", ["About 30 days", "About 90 days", "About 500 days"]],
-      ["Poultry", "Domesticated birds raised for products such as meat and eggs", ["A cattle breed", "A pasture grass", "A soil organism"]],
-      ["Brooding", "Providing appropriate warmth and care for young chicks", ["Collecting cattle", "Milking cows", "Shearing sheep"]],
-      ["Balanced ration", "Feed formulated to meet an animal's nutrient requirements", ["Feed that maximizes waste", "Feed without nutrients", "Feed that eliminates water needs"]],
-      ["Calcium", "A mineral essential for bones and eggshell formation", ["A livestock disease", "A plant pathogen", "A source of drinking water"]],
-      ["Feed conversion ratio", "Feed consumed per unit of weight gain or product output", ["Animals per barn", "Water in milk", "Eggs per nest"]],
-      ["Feed efficiency", "The ability to convert feed into animal growth or products", ["The color of the feed bag", "The number of barns", "The length of the farm road"]],
-      ["Selective breeding", "Choosing parents with desirable traits for future generations", ["Breeding without considering traits", "Preventing reproduction", "Feeding only one type of grass"]],
-      ["Heredity", "The transmission of genetic traits from parents to offspring", ["The digestion of feed", "The movement of livestock", "The storage of forage"]],
-      ["Heterosis", "Improved performance of crossbred offspring relative to a chosen parental benchmark", ["A livestock disease", "A feed storage method", "The loss of genetic variation"]],
-      ["Sperm", "The male reproductive cell", ["The female reproductive cell", "The placenta", "The embryo"]],
-      ["Ovary", "The female organ that produces ova", ["The liver", "The kidney", "The lung"]],
-      ["Weaning", "Ending or reducing a young animal's dependence on its mother's milk", ["Starting pregnancy", "Increasing birth weight directly", "Removing all water"]],
-      ["Mastitis", "Inflammation of the mammary gland", ["A hoof injury", "A poultry feather condition", "A type of forage"]],
-      ["Biosecurity", "Practices that reduce the introduction and spread of disease", ["Sharing unclean needles", "Ignoring quarantine", "Mixing sick and healthy animals without precautions"]],
-      ["Vaccination", "Administration of a vaccine to stimulate protective immunity", ["Weighing livestock", "Castration", "Feed fermentation"]],
-      ["Deworming", "Treatment to control susceptible internal or external parasitic worms", ["Removing horns", "Clipping feathers", "Collecting milk"]],
-      ["Monogastric", "An animal with a simple, single-chambered stomach, such as a pig", ["A ruminant such as cattle", "A four-compartment stomach", "A plant-parasitic nematode"]],
-      ["Roughage", "Bulky, fibrous feed such as hay and pasture", ["A vaccine", "A livestock egg", "A pesticide"]],
-      ["Concentrate feed", "Feed relatively rich in energy or protein and generally lower in fiber than roughage", ["Drinking water only", "A mineral block only", "A type of livestock disease"]],
-      ["Silage", "Forage preserved through controlled fermentation", ["Dry grain only", "Fresh milk", "A deworming medicine"]],
-      ["Hay", "Forage that has been dried and stored for feed", ["Fresh manure", "Fermented milk", "A mineral supplement"]],
-      ["Methane", "A greenhouse gas produced during enteric fermentation in ruminants", ["Oxygen", "Helium", "Neon"]],
-      ["Placenta", "An organ supporting nutrient, gas, and waste exchange between mother and fetus", ["A feed ingredient", "A poultry egg", "A horn structure"]],
-      ["Castration", "A procedure that removes or disables male reproductive function", ["Increasing unwanted breeding", "Preventing feeding", "Guaranteeing coat color"]],
-      ["Mammary gland", "The organ that produces milk", ["The organ that produces wool", "The organ that makes eggshells in all animals", "The animal's hoof"]],
-      ["Sheep", "A livestock species commonly raised for wool and meat", ["A poultry species", "A fish species", "A grain crop"]],
-      ["Pedigree record", "A record of an animal's ancestry", ["A rainfall chart", "A soil survey", "A fertilizer label"]],
-      ["Body condition score", "An assessment of an animal's relative body fat and condition", ["A measure of feed color", "A pasture age", "A market price"]],
-      ["Clean drinking water", "Supports hydration, digestion, temperature regulation, and normal body functions", ["Eliminates every disease", "Replaces all nutrients", "Guarantees maximum growth"]],
-      ["Quarantine", "Separating animals to reduce the risk of disease introduction or spread", ["Mixing sick animals with healthy animals", "A feed ration", "An egg grading system"]],
-      ["Crossbreeding", "Mating animals of different breeds within the same species", ["Mating the same genetic line only", "Preventing all reproduction", "A guaranteed way to produce fertile offspring between any species"]],
-      ["Free-range poultry", "A system that gives birds access to a designated outdoor area", ["A sealed incubator", "An artificial insemination method", "A cattle housing system"]],
-      ["Chicken incubation", "Approximately 21 days under suitable conditions", ["7 days", "14 days", "35 days"]],
-      ["Feed storage", "Keeping feed dry, clean, and protected from pests", ["Storing feed in standing water", "Mixing moldy feed with clean feed", "Leaving feed exposed to rain"]],
-      ["Animal welfare", "The physical and mental well-being of animals", ["Production regardless of suffering", "The selling of livestock only", "The classification of feed"]],
-      ["Dairy records", "Records used to monitor milk yield and production performance", ["Soil surveys only", "Rainfall charts only", "Crop variety lists"]],
-      ["Livestock housing", "Shelter designed to support animal comfort, safety, hygiene, and management", ["A substitute for all nutrition", "A guarantee against every disease", "A way to eliminate veterinary care"]]
-    ]
-  },
-  {
-    id: 4,
-    name: "Crop Protection",
-    icon: "🛡️",
-    concepts: [
-      ["Crop protection", "The management of pests, diseases, and weeds that damage crops", ["The study of stars", "Livestock breeding", "Farm product marketing only"]],
-      ["Late blight pathogen", "Phytophthora infestans, an oomycete that causes potato and tomato late blight", ["An aphid", "An earthworm", "A grasshopper"]],
-      ["Fungal pathogen", "An organism such as Puccinia that causes plant rust diseases", ["A maize plant", "An earthworm", "A fertilizer"]],
-      ["Insect pest", "An insect that damages crops or stored products", ["Every beneficial soil organism", "A plant nutrient", "A farm machine"]],
-      ["Aphid", "A sap-sucking insect that can transmit some plant viruses", ["A soil mineral", "A crop variety", "A type of fertilizer"]],
-      ["Weed", "A plant growing where it is unwanted", ["Every crop grown for sale", "A soil nutrient", "A type of pesticide"]],
-      ["Integrated pest management", "Combining compatible control methods to manage pests sustainably", ["Using the highest pesticide dose always", "Killing every insect indiscriminately", "Relying on one pesticide forever"]],
-      ["Biological control", "Using natural enemies to suppress pest populations", ["Using fertilizer", "Harvesting grain", "Measuring soil pH"]],
-      ["Lady beetle", "A beneficial predator that feeds on aphids and other small pests", ["A crop pathogen", "A fertilizer", "A weed species"]],
-      ["Pesticide", "A substance intended to prevent, destroy, or control pests", ["A crop rotation", "An irrigation pipe", "A soil texture"]],
-      ["Herbicide", "A pesticide designed to control weeds", ["A fungicide", "A livestock vaccine", "A soil nutrient"]],
-      ["Fungicide", "A product used to manage fungal diseases", ["A harvesting tool", "A livestock ration", "A market price"]],
-      ["Insecticide", "A product intended to control insects", ["A nitrogen fertilizer", "A pruning tool", "A soil sample"]],
-      ["Pesticide resistance", "Reduced susceptibility of a pest population to a pesticide", ["Permanent elimination of every pest", "Plant immunity to all diseases", "Conversion of pesticide into fertilizer"]],
-      ["Resistance management", "Using strategies such as mode-of-action rotation and nonchemical controls", ["Repeatedly using the same mode of action without a plan", "Ignoring pest monitoring", "Applying any dose"]],
-      ["Plant disease", "A harmful disruption of normal plant function caused by a pathogen or other factor", ["Every normal change in leaf color", "Normal seed germination", "A fertilizer"]],
-      ["Bacterial plant disease", "A disease caused by bacteria, such as bacterial wilt", ["Powdery mildew", "Rust", "Downy mildew"]],
-      ["Disease vector", "An organism that transmits a pathogen between hosts", ["A soil mineral", "A fertilizer", "A harvesting tool"]],
-      ["Virus vector", "An organism such as an aphid that transmits certain plant viruses", ["An earthworm in all cases", "A grain crop", "A soil horizon"]],
-      ["Disease symptom", "A plant response such as chlorosis, wilting, or necrosis", ["A pathogen itself in every case", "A market price", "The age of the crop"]],
-      ["Disease sign", "Direct evidence of a pathogen, such as visible fungal spores", ["A plant's response to drought only", "A crop price change", "A farm boundary"]],
-      ["Crop rotation for pest management", "Changing crops in sequence to disrupt some pest life cycles", ["Increasing pest survival indefinitely", "Avoiding all monitoring", "Making all soils identical"]],
-      ["Plant quarantine", "Restricting movement of infested materials to prevent pest spread", ["Applying excess fertilizer", "Moving infested seed freely", "Irrigating every field continuously"]],
-      ["Seed treatment", "Applying a suitable protective treatment to seed before planting", ["Harvesting mature grain", "Storing produce in a market", "Pruning mature trees"]],
-      ["Plant-parasitic nematode", "A microscopic roundworm that feeds on plants", ["A beneficial insect", "A fungal spore", "A mineral nutrient"]],
-      ["Root-knot nematode symptom", "Galls or swellings on affected roots", ["Improved root growth in every case", "Larger fruit always", "Blue flower petals"]],
-      ["Economic injury level", "The pest population at which economic losses justify control", ["The number of farm workers", "The amount of fertilizer", "The lowest market price"]],
-      ["Economic threshold", "The pest level at which action is needed to prevent reaching the injury level", ["The highest pesticide dose", "The total crop yield", "The number of weeds after harvest"]],
-      ["Contact pesticide", "A pesticide that affects its target through contact with treated surfaces or organisms", ["A fertilizer only", "A seed variety", "A nitrogen fixation method"]],
-      ["Systemic pesticide", "A pesticide absorbed and moved within a plant", ["A product that always stays outside plants", "A product used only against weeds", "A product with no biological activity"]],
-      ["Personal protective equipment", "Equipment that reduces exposure to hazardous substances during pesticide handling", ["A way to increase pest reproduction", "A substitute for label directions", "A guarantee of zero exposure"]],
-      ["Pesticide label", "The source of product directions, restrictions, and safety instructions", ["A random social media post", "A market advertisement", "An unrelated crop calendar"]],
-      ["Pollinator protection", "Following label restrictions and avoiding harmful exposure of pollinators", ["Spraying indiscriminately during bee activity", "Destroying all flowering plants", "Ignoring pesticide risks"]],
-      ["Crop scouting", "Regular field observation to detect pests, diseases, and crop problems", ["Measuring national population", "Calculating inflation", "Determining livestock gestation"]],
-      ["Mechanical weed control", "Removing weeds by hand, hoeing, or suitable machinery", ["Applying a fungicide", "Vaccinating livestock", "Using an insect attractant"]],
-      ["Cultural pest control", "Changing crop practices to make conditions less favorable for pests", ["Using chemicals exclusively", "Ignoring field sanitation", "Planting infested seed intentionally"]],
-      ["Crop sanitation", "Managing infected residues and other sources of pests and pathogens", ["Keeping all infected residues without management", "Planting diseased seedlings", "Leaving contaminated tools uncleaned"]],
-      ["Fungicide mode of action", "The biological target or process through which a fungicide affects fungi", ["The packaging color", "The seed rate", "The selling price"]],
-      ["Leaf wetness", "A condition that can favor infection by many fungal and oomycete pathogens", ["A guarantee of disease absence", "A substitute for a host", "A type of fertilizer"]],
-      ["Damping-off", "Decay of seeds or young seedlings before or shortly after emergence", ["Fruit ripening", "A cattle nutrient deficiency", "A grading system"]],
-      ["Host plant resistance", "A plant variety's ability to limit pest development or damage", ["A guarantee that pests never occur", "A fertilizer application", "A storage container"]],
-      ["Preharvest interval", "The required time between the last pesticide application and harvest", ["The time needed to plant a seed", "The length of crop rotation", "The time between rain events"]],
-      ["Pesticide misuse", "Can harm people, beneficial organisms, and the environment", ["Always improves biodiversity", "Eliminates every residue", "Prevents resistance in every case"]],
-      ["Pheromone trap", "A device using chemical signals to monitor or trap certain insect pests", ["A soil nitrogen meter", "An irrigation system", "A grain dryer"]],
-      ["Rust disease", "A group of plant diseases commonly caused by rust fungi", ["A livestock disease", "A fertilizer deficiency in all cases", "A soil classification"]],
-      ["Pesticide disposal", "Following label directions and applicable hazardous-waste requirements", ["Pouring leftovers into streams", "Reusing containers for food", "Discarding waste beside wells"]],
-      ["Resistant crop variety", "A variety that reduces damage or pest development under relevant conditions", ["A variety that needs no management ever", "A variety that always yields maximum output", "A variety immune to every stress"]],
-      ["Pest monitoring", "Systematic observation or sampling used to estimate pest presence and levels", ["Applying chemicals at random", "Ignoring field conditions", "Measuring market prices"]],
-      ["Weed seed bank", "The reserve of viable weed seeds present in the soil", ["The farmer's savings account", "A fertilizer store", "A livestock record"]],
-      ["Disease triangle", "The interaction among a susceptible host, a pathogen, and a favorable environment", ["Soil, tractor, and market", "Seed, fertilizer, and price", "Rain, livestock, and storage"]],
-      ["Crop protection record", "A record of observations and treatments that supports management decisions", ["A guarantee of zero pests", "A replacement for scouting", "A farm boundary map"]]
-    ]
-  },
-  {
-    id: 5,
-    name: "Crop Science",
+  "Animal Science": [
+    ["Ruminant", "An animal with a fore-stomach system that includes a rumen for microbial fermentation"],
+    ["Rumen", "The major fermentation chamber of cattle, sheep, goats, and other ruminants"],
+    ["Reticulum", "The ruminant stomach compartment that works with the rumen in mixing and sorting feed"],
+    ["Omasum", "The ruminant stomach compartment that absorbs water and some nutrients"],
+    ["Abomasum", "The glandular stomach compartment of ruminants that secretes acid and enzymes"],
+    ["Monogastric", "An animal with a single main stomach chamber"],
+    ["Roughage", "Feed with relatively high fiber content and generally lower digestible energy"],
+    ["Concentrate", "Feed relatively rich in energy or protein and low in crude fiber"],
+    ["Crude protein", "An estimate of feed protein based on its nitrogen content"],
+    ["Digestible energy", "Gross energy consumed minus energy lost in feces"],
+    ["Metabolizable energy", "Digestible energy minus energy lost mainly in urine and combustible gases"],
+    ["Maintenance requirement", "Nutrients needed to sustain vital functions without production or growth"],
+    ["Feed conversion ratio", "Feed consumed divided by weight gain or product output, depending on the measure"],
+    ["Balanced ration", "A daily feed mixture supplying required nutrients in suitable amounts and proportions"],
+    ["Silage", "Moist forage preserved by anaerobic fermentation"],
+    ["Hay", "Forage preserved by drying to a safe moisture level"],
+    ["Colostrum", "The first mammary secretion after birth, rich in antibodies and nutrients"],
+    ["Passive immunity", "Protection received through transferred antibodies rather than produced by the animal"],
+    ["Estrus", "The period when a female is sexually receptive and may accept mating"],
+    ["Ovulation", "The release of an oocyte from an ovarian follicle"],
+    ["Gestation length", "The period from conception to parturition"],
+    ["Parturition", "The process of giving birth"],
+    ["Artificial insemination", "The placement of collected semen into the female reproductive tract without natural mating"],
+    ["Estrous synchronization", "Management that coordinates estrus or ovulation among females"],
+    ["Crossbreeding", "Mating animals from different breeds within the same species"],
+    ["Heterosis", "The superiority of crossbred offspring over the average of the parental breeds for a trait"],
+    ["Inbreeding", "Mating of related animals that increases homozygosity"],
+    ["Heritability", "The proportion of observed phenotypic variance attributable to additive genetic variance in a defined population"],
+    ["Selection differential", "The difference between the mean of selected parents and the population mean"],
+    ["Biosecurity", "Practices that prevent introduction and spread of infectious agents"],
+    ["Quarantine", "Separation of new or exposed animals to observe for disease and reduce transmission"],
+    ["Vaccination", "Administration of an antigenic preparation to stimulate specific immunity"],
+    ["Mastitis", "Inflammation of the mammary gland, often caused by infection"],
+    ["Brucellosis", "A bacterial disease that can cause reproductive losses and may infect humans"],
+    ["Foot-and-mouth disease", "A highly contagious viral disease of cloven-hoofed animals"],
+    ["Newcastle disease", "A contagious viral disease affecting poultry, with respiratory, digestive, or nervous signs"],
+    ["Coccidiosis", "Disease caused by protozoan parasites that damage the intestinal tract"],
+    ["Deworming", "Treatment intended to control internal parasitic worms"],
+    ["Carcass dressing percentage", "Carcass weight expressed as a percentage of live weight"],
+    ["Body condition score", "A visual or palpation-based estimate of an animal's fat and energy reserves"],
+    ["Lactation", "The production and secretion of milk by the mammary gland"],
+    ["Dry period", "The interval before calving when a dairy cow is not milked"],
+    ["Brooding", "Providing suitable warmth and care to young chicks"],
+    ["Stocking density", "The number of animals housed or kept per unit of area"],
+    ["Thermoneutral zone", "The range of environmental temperatures in which an animal maintains body temperature with minimal extra energy"],
+    ["Rigor mortis", "Postmortem muscle stiffening caused by depletion of ATP"],
+    ["Meat marbling", "Intramuscular fat distributed within muscle tissue"],
+    ["Egg candling", "Inspection of eggs using transmitted light to assess contents and development"],
+    ["Feed additive", "An ingredient included in small amounts to improve feed use, animal health, or product quality"],
+    ["Animal welfare", "The animal's physical and mental state in relation to the conditions in which it lives and dies"]
+  ],
+
+  "Crop Science": [
+    ["Photosynthesis", "The conversion of light energy into chemical energy using carbon dioxide and water"],
+    ["Respiration", "The metabolic release of energy from organic compounds for cellular processes"],
+    ["Transpiration", "The loss of water vapor from plant surfaces, mainly through stomata"],
+    ["Stomata", "Epidermal pores regulated by guard cells that control gas exchange and water loss"],
+    ["Photoperiodism", "Plant responses to the relative lengths of day and night"],
+    ["Vernalization", "The promotion of flowering by exposure to a period of low temperature"],
+    ["Apical dominance", "Suppression of lateral bud growth by signals associated with the shoot apex"],
+    ["Auxin", "A plant hormone important in cell elongation, tropic responses, and apical dominance"],
+    ["Gibberellin", "A plant hormone involved in stem elongation, germination, and some flowering responses"],
+    ["Cytokinin", "A plant hormone that promotes cell division and can delay leaf senescence"],
+    ["Abscisic acid", "A plant hormone involved in stomatal closure and responses to water stress"],
+    ["Ethylene", "A gaseous plant hormone involved in fruit ripening and several stress responses"],
+    ["Nitrogen deficiency", "A condition often causing older leaves to become uniformly pale or yellow"],
+    ["Phosphorus deficiency", "A condition often associated with stunted growth and sometimes purpling of older leaves"],
+    ["Potassium deficiency", "A condition commonly causing marginal chlorosis or scorching on older leaves"],
+    ["Seed dormancy", "A condition in which viable seeds fail to germinate under otherwise favorable conditions"],
+    ["Seed viability", "The capacity of a seed to remain alive and potentially germinate"],
+    ["Seed vigor", "The ability of seeds to germinate rapidly and establish normal seedlings across conditions"],
+    ["Scarification", "Treatment that weakens or breaks a hard seed coat to improve water entry"],
+    ["Stratification", "Moist temperature treatment used to overcome dormancy in certain seeds"],
+    ["Germination", "The resumption of embryo growth leading to emergence of the radicle"],
+    ["Transplanting shock", "Temporary growth stress after seedlings are moved to a new growing environment"],
+    ["Tillering", "The production of lateral shoots from the base of grasses and cereal crops"],
+    ["Heading", "The emergence of the inflorescence from the flag-leaf sheath in cereals"],
+    ["Anthesis", "The period when a flower opens and reproductive structures become exposed"],
+    ["Pollination", "The transfer of pollen to the receptive stigma of a flower"],
+    ["Fertilization", "The fusion of male and female gametes to form a zygote"],
+    ["Double fertilization", "The angiosperm process producing a zygote and endosperm through two sperm-cell fusions"],
+    ["Source-sink relationship", "The movement of assimilates from producing organs to organs that use or store them"],
+    ["Harvest index", "The ratio of economic yield to total aboveground biological yield"],
+    ["Lodging", "The bending or falling of crop stems before harvest"],
+    ["Crop rotation", "The planned sequence of different crops on the same land over seasons"],
+    ["Intercropping", "Growing two or more crops together on the same field during part of their life cycles"],
+    ["Relay cropping", "Planting a second crop before the first crop is harvested"],
+    ["Plant population", "The number of plants established per unit of land area"],
+    ["Row spacing", "The distance between adjacent crop rows"],
+    ["Thinning", "Removal of excess seedlings to achieve the desired plant population"],
+    ["Roguing", "Removal of off-type, diseased, or undesirable plants from a crop or seed field"],
+    ["Hybrid seed", "Seed produced by crossing selected parental lines to obtain first-generation offspring"],
+    ["Open-pollinated variety", "A variety maintained through pollination within a population that can reproduce relatively true to type"],
+    ["Heterozygosity", "The presence of different alleles at a genetic locus in an individual"],
+    ["Genotype", "The genetic constitution of an organism"],
+    ["Phenotype", "The observable characteristics produced by genotype and environment"],
+    ["Quantitative trait", "A trait showing continuous variation and commonly influenced by many genes and environment"],
+    ["Mutation breeding", "The use of induced or spontaneous mutations to develop useful crop variation"],
+    ["Tissue culture", "The aseptic growth of plant cells, tissues, or organs on a nutrient medium"],
+    ["Hardening off", "Gradual acclimatization of seedlings to field conditions before transplanting"],
+    ["Mulching", "Covering the soil surface to conserve moisture, moderate temperature, or suppress weeds"],
+    ["Allelopathy", "The influence of chemicals released by one plant on the growth of another"],
+    ["Critical period of weed control", "The crop growth interval when weeds must be controlled to prevent unacceptable yield loss"]
+  ],
+
+  "Crop Protection": [
+    ["Pathogen", "An organism or agent capable of causing disease in a host"],
+    ["Inoculum", "The pathogen material that can initiate infection"],
+    ["Infection", "The establishment and growth of a pathogen in a host"],
+    ["Incubation period", "The time between infection and appearance of disease symptoms"],
+    ["Disease triangle", "The interaction of a susceptible host, a virulent pathogen, and a favorable environment"],
+    ["Systemic fungicide", "A fungicide absorbed and moved within plant tissues to act beyond the application site"],
+    ["Contact fungicide", "A fungicide that protects treated surfaces and generally is not transported extensively inside the plant"],
+    ["Insect vector", "An insect that transmits a pathogen between plants or animals"],
+    ["Mechanical transmission", "Spread of a pathogen through physical contact, tools, or handling"],
+    ["Integrated pest management", "A decision-based approach combining compatible tactics to keep pests below damaging levels"],
+    ["Economic injury level", "The pest density at which the cost of damage equals the cost of control"],
+    ["Economic threshold", "The pest level at which action should be taken to prevent reaching the economic injury level"],
+    ["Biological control", "The use of natural enemies or biological agents to suppress a pest"],
+    ["Predator", "An organism that consumes multiple prey individuals during its life"],
+    ["Parasitoid", "An insect whose immature stage develops on or in a host and ultimately kills it"],
+    ["Entomopathogen", "A microorganism that causes disease in insects or other arthropods"],
+    ["Host resistance", "Inherited plant characteristics that reduce pest establishment, development, or damage"],
+    ["Tolerance", "The ability of a plant to withstand or recover from pest injury with relatively limited yield loss"],
+    ["Escape", "Avoidance of damage because crop timing or location does not overlap with peak pest pressure"],
+    ["Pesticide mode of action", "The biological process or site in the pest that a pesticide disrupts"],
+    ["Resistance management", "Practices that delay the evolution of heritable pest resistance to control measures"],
+    ["LD50", "The dose of a substance expected to kill 50 percent of a test population under specified conditions"],
+    ["Preharvest interval", "The minimum time required between the last pesticide application and harvest"],
+    ["Re-entry interval", "The period after pesticide application before workers may safely enter the treated area under label directions"],
+    ["Phytotoxicity", "Plant injury caused by a chemical, treatment, or environmental factor"],
+    ["Spray drift", "Movement of pesticide droplets or vapor away from the intended target"],
+    ["Calibration", "Adjustment and checking of application equipment to deliver the intended rate"],
+    ["Protective equipment", "Clothing and devices used to reduce exposure to occupational hazards"],
+    ["Quarantine pest", "A pest subject to official controls because of its potential economic or environmental impact"],
+    ["Sanitation", "Removal or destruction of infested plant material and other sources of pests or pathogens"],
+    ["Crop scouting", "Systematic field inspection to identify pests, beneficial organisms, and crop injury"],
+    ["Fungal spore", "A reproductive or dispersal unit produced by many fungi"],
+    ["Bacterial wilt", "A disease syndrome involving bacterial infection and loss of water transport or plant turgor"],
+    ["Powdery mildew", "A fungal disease often appearing as white powdery growth on plant surfaces"],
+    ["Downy mildew", "A disease caused by oomycetes, often with downy growth on leaf undersides in humid conditions"],
+    ["Rust disease", "A plant disease commonly producing rust-colored pustules containing spores"],
+    ["Viral mosaic", "A symptom pattern of irregular light and dark green areas on leaves"],
+    ["Root-knot nematode", "A plant-parasitic nematode that induces characteristic galls on roots"],
+    ["Mycotoxin", "A toxic secondary metabolite produced by certain fungi"],
+    ["Aflatoxin", "A potent mycotoxin produced by some Aspergillus species, including certain strains of A. flavus"],
+    ["Weed seed bank", "The viable weed seeds present in the soil and on its surface"],
+    ["Herbicide selectivity", "The ability of a herbicide to injure target weeds more than the crop when properly used"],
+    ["Pre-emergence herbicide", "A herbicide applied before target weeds emerge, according to the product label"],
+    ["Post-emergence herbicide", "A herbicide applied after target weeds have emerged"],
+    ["Resistance gene pyramid", "Combining multiple resistance genes in a crop to improve durability against a pathogen"],
+    ["Disease incidence", "The proportion or percentage of plants or units showing disease"],
+    ["Disease severity", "The amount of plant tissue or plant area affected by disease"],
+    ["Vector competence", "The ability of a vector to acquire, maintain, and transmit a pathogen"],
+    ["Pheromone trap", "A monitoring or control device that uses chemical signals to attract a target pest"],
+    ["Threshold-based spraying", "Applying a pesticide when monitoring indicates pest levels justify intervention"]
+  ],
+
+  "Agricultural Extension and Management": [
+    ["Agricultural extension", "a process that facilitates learning and change among farmers and rural communities"],
+    ["Technology transfer", "the movement of knowledge, practices, or technologies from developers or institutions to users"],
+    ["Participatory rural appraisal", "a set of methods that enables local people to analyze their conditions and priorities"],
+    ["Needs assessment", "a systematic process for identifying gaps between current and desired conditions"],
+    ["Baseline survey", "data collection before an intervention to establish starting conditions"],
+    ["Monitoring", "the routine tracking of activities, outputs, and progress during implementation"],
+    ["Evaluation", "the systematic assessment of an intervention's relevance, effectiveness, efficiency, impact, or sustainability"],
+    ["Logic model", "a framework linking resources, activities, outputs, outcomes, and impacts"],
+    ["Input", "a resource invested in a project, such as staff, funds, equipment, or time"],
+    ["Output", "a direct product or service delivered by project activities"],
+    ["Outcome", "a change in behavior, capacity, practice, or condition associated with a program"],
+    ["Impact", "a broader, longer-term change to which an intervention contributes"],
+    ["SMART objective", "an objective that is specific, measurable, achievable, relevant, and time-bound"],
+    ["Diffusion of innovations", "the process by which an innovation spreads through a social system over time"],
+    ["Early adopter", "a person who adopts an innovation relatively early and may influence others"],
+    ["Trialability", "the extent to which an innovation can be experimented with on a limited basis"],
+    ["Observability", "the extent to which results of an innovation are visible to others"],
+    ["Compatibility", "the degree to which an innovation fits existing values, needs, and experience"],
+    ["Complexity", "the perceived difficulty of understanding and using an innovation"],
+    ["Demonstration farm", "a farm used to show and evaluate recommended practices under practical conditions"],
+    ["Farmer field school", "a group-based, season-long learning approach using observation and field experimentation"],
+    ["Extension method", "a planned way of communicating and facilitating learning, such as a farm visit or group meeting"],
+    ["Individual contact method", "extension communication directed to one client, such as a farm visit"],
+    ["Group extension method", "a learning activity involving several participants, such as a field day or group discussion"],
+    ["Mass communication method", "a method that reaches large audiences through channels such as radio or print"],
+    ["Feedback", "information from participants or stakeholders used to improve communication or program delivery"],
+    ["Communication barrier", "a factor that interferes with accurate exchange or understanding of information"],
+    ["Adult learning", "an approach that recognizes adults' experience, practical goals, and role in directing their learning"],
+    ["Facilitation", "guiding a group process so participants can contribute, analyze, and make decisions"],
+    ["Leadership", "the process of influencing and supporting people toward shared goals"],
+    ["Delegation", "assigning authority and responsibility for a task while retaining appropriate accountability"],
+    ["Organizational structure", "the formal arrangement of roles, responsibilities, and reporting relationships"],
+    ["Span of control", "the number of people who report directly to a manager"],
+    ["Planning", "setting objectives and deciding in advance the actions and resources needed"],
+    ["Organizing", "arranging people, tasks, and resources to implement a plan"],
+    ["Staffing", "recruiting, selecting, developing, and assigning personnel"],
+    ["Directing", "guiding and motivating people as they carry out work"],
+    ["Controlling", "comparing actual performance with standards and correcting important deviations"],
+    ["SWOT analysis", "assessment of internal strengths and weaknesses and external opportunities and threats"],
+    ["Gantt chart", "a schedule showing activities against time, often using horizontal bars"],
+    ["Critical path", "the sequence of dependent activities that determines the shortest possible project duration"],
+    ["Risk management", "identifying, assessing, and responding to uncertainties that may affect objectives"],
+    ["Stakeholder analysis", "identifying affected or influential groups and examining their interests and influence"],
+    ["Conflict resolution", "a process for addressing disagreement and seeking an acceptable solution"],
+    ["Cooperative", "an enterprise jointly owned and democratically controlled by members for their mutual benefit"],
+    ["Value chain", "the linked activities and actors involved in producing, processing, and delivering a product"],
+    ["Entrepreneurship", "organizing resources and taking calculated risks to create and operate an enterprise"],
+    ["Record keeping", "systematic documentation of transactions, activities, inputs, outputs, and results"],
+    ["Cash flow", "the movement of money into and out of an enterprise over a period"],
+    ["Gross margin", "gross revenue minus variable costs for an enterprise or production activity"],
+    ["Break-even point", "the output or sales level at which total revenue equals total cost"]
+  ],
+
+  "Agricultural Economics and Marketing": [
+    ["Opportunity cost", "the value of the best alternative forgone when a choice is made"],
+    ["Marginal cost", "the additional total cost of producing one more unit of output"],
+    ["Marginal revenue", "the additional revenue obtained from selling one more unit of output"],
+    ["Fixed cost", "a cost that does not change with output over the relevant short-run range"],
+    ["Variable cost", "a cost that changes with the level of production"],
+    ["Total cost", "the sum of fixed and variable costs"],
+    ["Average cost", "total cost divided by the quantity produced"],
+    ["Gross revenue", "the total value of sales before deducting production costs"],
+    ["Net farm income", "farm revenue remaining after specified production expenses are deducted"],
+    ["Profit maximization", "choosing output or inputs to obtain the greatest possible profit under given conditions"],
+    ["Law of demand", "the inverse relationship between price and quantity demanded, other factors held constant"],
+    ["Law of supply", "the direct relationship between price and quantity supplied, other factors held constant"],
+    ["Demand elasticity", "the responsiveness of quantity demanded to a change in a determinant such as price"],
+    ["Price elasticity of demand", "the percentage change in quantity demanded divided by the percentage change in price"],
+    ["Substitute goods", "goods that can be used in place of one another"],
+    ["Complementary goods", "goods commonly consumed or used together"],
+    ["Market equilibrium", "the price and quantity at which quantity supplied equals quantity demanded"],
+    ["Price ceiling", "a legal maximum price, which can create a shortage if set below equilibrium"],
+    ["Price floor", "a legal minimum price, which can create a surplus if set above equilibrium"],
+    ["Perfect competition", "a market structure with many buyers and sellers, homogeneous products, and easy entry and exit"],
+    ["Monopoly", "a market structure in which one seller supplies a product with no close substitutes"],
+    ["Monopsony", "a market structure with a single buyer for a good or service"],
+    ["Oligopoly", "a market structure dominated by a small number of interdependent firms"],
+    ["Comparative advantage", "the ability to produce a good at a lower opportunity cost than another producer"],
+    ["Economies of scale", "reductions in average cost as production scale increases over a relevant range"],
+    ["Diseconomies of scale", "increases in average cost when an operation becomes too large or complex"],
+    ["Production function", "the relationship between quantities of inputs used and output produced"],
+    ["Diminishing marginal returns", "the decline in additional output from successive units of a variable input when other inputs are fixed"],
+    ["Technical efficiency", "producing the maximum feasible output from given inputs or using minimum inputs for a given output"],
+    ["Allocative efficiency", "using resources in proportions that best reflect costs and the value of outputs"],
+    ["Farm budgeting", "estimating expected revenues, costs, and returns for a farm activity or plan"],
+    ["Partial budget", "an analysis of the costs and benefits caused by a proposed change in a farm operation"],
+    ["Enterprise budget", "a plan of expected costs and returns for one farm enterprise"],
+    ["Benefit-cost ratio", "the present value of benefits divided by the present value of costs, under a stated method"],
+    ["Net present value", "the present value of benefits minus the present value of costs"],
+    ["Inflation", "a sustained increase in the general price level that reduces purchasing power"],
+    ["Real price", "a price adjusted for changes in the general price level"],
+    ["Agricultural marketing", "activities that move agricultural products from producers toward consumers"],
+    ["Marketing margin", "the difference between prices at two stages of a marketing channel"],
+    ["Farmgate price", "the price received by a producer at the farm or point of first sale"],
+    ["Marketable surplus", "the quantity of output available for sale after on-farm use and other needs"],
+    ["Postharvest loss", "a reduction in quantity or quality of produce after harvest"],
+    ["Value addition", "increasing a product's economic value through processing, grading, packaging, or related services"],
+    ["Grading", "sorting products into groups based on defined quality or size standards"],
+    ["Standardization", "establishing and applying consistent specifications for product quality, size, or other attributes"],
+    ["Market information system", "a system that collects and shares information on prices, supply, demand, and market conditions"],
+    ["Price spread", "the difference between the price paid by consumers and the price received by producers"],
+    ["Contract farming", "an arrangement in which producers and buyers agree in advance on production or marketing terms"],
+    ["Commodity exchange", "an organized market where standardized commodity contracts may be traded"],
+    ["Risk diversification", "spreading activities or investments to reduce exposure to a single source of risk"],
+    ["Agricultural insurance", "a risk-transfer arrangement that compensates eligible losses under a defined policy"]
+  ],
+
+};
+
+// Subject information
+const subjectInfo = {
+  "Soil Science": {
     icon: "🌱",
-    concepts: [
-      ["Crop science", "The study of crop production, management, and improvement", ["Ocean currents", "Livestock anatomy only", "Mineral extraction"]],
-      ["Plant roots", "Primarily absorb water and mineral nutrients and anchor the plant", ["Produce grain directly", "Absorb sunlight as their main function", "Pollinate flowers"]],
-      ["Photosynthesis", "The process using light energy to produce organic compounds from carbon dioxide and water", ["The breakdown of rocks", "The absorption of water only", "The harvesting of grain"]],
-      ["Carbon dioxide", "The gas absorbed by plants for photosynthesis", ["Oxygen", "Helium", "Neon"]],
-      ["Chlorophyll", "A pigment that absorbs light energy for photosynthesis", ["Hemoglobin", "Keratin", "Melanin"]],
-      ["Transpiration", "The loss of water vapor from plant surfaces, especially leaves", ["The formation of seeds", "The harvesting of grain", "The movement of pollen"]],
-      ["Germination", "The resumption of embryo growth to produce a seedling", ["The ripening of fruit", "The loss of leaves", "The harvesting of grain"]],
-      ["Seed germination requirement", "Adequate moisture, oxygen, and suitable temperature for many crop seeds", ["Permanent absence of water", "Destruction of the embryo", "Continuous exposure to toxic chemicals"]],
-      ["Seed dormancy", "A condition in which a viable seed fails to germinate under otherwise favorable conditions", ["Maximum fruit production", "A fertilizer application", "A harvesting method"]],
-      ["Monocotyledon", "A flowering plant whose embryo typically has one cotyledon", ["A plant with no roots", "A plant without seeds", "A plant lacking vascular tissue"]],
-      ["Rice", "A common monocot crop", ["Bean", "Peanut", "Tomato"]],
-      ["Soybean", "A common dicot crop", ["Rice", "Maize", "Sugarcane"]],
-      ["Pollination", "The transfer of pollen to a receptive stigma", ["Fertilizer absorption", "Root growth", "Grain storage"]],
-      ["Self-pollination", "Pollination involving the same flower or plant in self-compatible species", ["Pollination between unrelated species", "Pollination by wind only in every case", "The absence of pollen"]],
-      ["Cross-pollination", "Transfer of pollen between different plants of the same species", ["Root formation", "Chlorophyll production", "Water transport"]],
-      ["Crop rotation", "Growing different crops in sequence on the same land", ["Growing one crop indefinitely", "Harvesting all crops on the same day", "Changing farm boundaries"]],
-      ["Legume nitrogen contribution", "Legumes can obtain nitrogen through symbiosis with nitrogen-fixing bacteria", ["Legumes remove all nutrients", "Legumes need no water", "Legumes prevent every pest"]],
-      ["Rhizobium", "A group of bacteria associated with nitrogen-fixing nodules on many legumes", ["A livestock pathogen", "A weed", "A fungicide"]],
-      ["Plant breeding", "Developing crop varieties with desirable traits", ["Marketing grain only", "Removing all genetic variation", "Measuring rainfall"]],
-      ["Hybrid vigor", "Improved performance of hybrid offspring relative to a selected parental benchmark", ["Seed dormancy", "Transpiration", "Etiolation"]],
-      ["Cultivar", "A cultivated plant variety selected for particular traits", ["An agricultural tax", "A soil horizon", "An irrigation tool"]],
-      ["Seed certification", "A process that provides assurance of seed identity and specified quality standards", ["A guarantee of highest market price", "A guarantee of genetic identity for every seed", "A substitute for seed testing"]],
-      ["Seed viability", "The ability of a seed to remain alive and potentially germinate", ["The weight of a seed bag", "The color of the seed coat", "The number of seedling leaves"]],
-      ["Plant spacing", "The distance between plants or planting rows", ["The depth of a river", "The weight of grain", "The acidity of fertilizer"]],
-      ["Proper plant spacing", "Helps manage competition for light, water, and nutrients", ["Guarantees identical yields", "Prevents every disease", "Eliminates irrigation needs"]],
-      ["Thinning", "Removing excess seedlings to achieve the desired plant population", ["Adding more seeds to every hole", "Harvesting mature grain", "Applying insecticide to weeds"]],
-      ["Irrigation", "Supplying water to crops when natural rainfall is insufficient", ["Increasing soil erosion intentionally", "Removing all soil nutrients", "Preventing photosynthesis"]],
-      ["Mulching", "Covering the soil surface with suitable materials", ["Removing every root", "Mixing grain with water after harvest", "Planting without spacing"]],
-      ["Organic mulch", "Can conserve soil moisture and suppress weeds", ["Always raises soil salinity", "Replaces all mineral nutrients", "Stops all nutrient cycling"]],
-      ["Harvest index", "The ratio of economic yield to total aboveground biological yield", ["The amount of rainfall", "The number of plants per hectare", "The weight of seed before planting"]],
-      ["Lodging", "The bending or falling of crop stems, often before harvest", ["New root formation", "Seed dormancy", "Flower opening"]],
-      ["Photoperiodism", "A plant response to the relative lengths of day and night", ["Water movement through soil", "Root nodule formation", "Grain breakdown"]],
-      ["Vernalization", "Induction or acceleration of flowering by prolonged low temperatures in responsive plants", ["Seed drying", "Hand weeding", "Phosphorus application"]],
-      ["C4 plant", "A plant using a photosynthetic pathway that initially fixes carbon into a four-carbon compound", ["A plant without photosynthesis", "A plant without chloroplasts", "A plant that only grows underwater"]],
-      ["Maize", "A common C4 crop", ["Rice", "Wheat", "Barley"]],
-      ["Wheat", "A common C3 crop", ["Maize", "Sugarcane", "Sorghum"]],
-      ["Xylem", "Plant tissue that transports water and mineral nutrients", ["Tissue that transports sugars only", "Pollen-producing tissue", "A seed coat"]],
-      ["Phloem", "Plant tissue that transports sugars and other organic substances", ["Water-absorbing root hairs only", "A flower part", "A fruit wall"]],
-      ["Chlorosis", "Yellowing of plant tissue associated with reduced chlorophyll", ["A seed stage", "Fruit formation", "Crop rotation"]],
-      ["Magnesium", "A nutrient that is part of the chlorophyll molecule", ["Gold", "Mercury", "Helium"]],
-      ["Nitrogen", "A major nutrient involved in protein synthesis and vegetative growth", ["Neon", "Argon", "Helium"]],
-      ["Phosphorus", "A nutrient important for energy transfer and root development", ["Gold", "Mercury", "Neon"]],
-      ["Potassium", "A nutrient involved in enzyme activation and stomatal regulation", ["Silver", "Tin", "Gold"]],
-      ["Cover crop", "A crop grown to protect soil and support soil health between or alongside main crops", ["An ornamental crop only", "A seed that cannot germinate", "An underwater-only crop"]],
-      ["Green manuring", "Growing and incorporating plant material into soil to improve it", ["Applying plastic sheets", "Burning every residue", "Removing organic matter"]],
-      ["Intercropping", "Growing two or more crops together in the same field for part or all of their growth periods", ["Growing one crop alone every year", "Planting only after harvest", "Storing seeds in a warehouse"]],
-      ["Crop diversification", "Can improve resource use and spread production risks", ["Guarantees identical yields every year", "Eliminates all labor", "Removes the need for soil management"]],
-      ["Seed rate", "The quantity of seed used per unit area", ["The price of one seed", "The clay percentage", "The irrigation depth"]],
-      ["Seedling hardening", "Gradually acclimating seedlings to field conditions before transplanting", ["Stopping root growth permanently", "Eliminating sunlight", "Preventing water uptake"]],
-      ["Postharvest handling", "Managing harvested produce to preserve quality and reduce losses", ["Planting seed before rainfall", "Pollinating flowers", "Applying fertilizer to growing roots"]]
-    ]
+    description: "Soil properties, fertility, classification, and conservation."
   },
-  {
-    id: 6,
-    name: "Soil Science",
-    icon: "🪴",
-    concepts: [
-      ["Soil science", "The study of soil formation, properties, classification, and management", ["The study of stars", "Livestock reproduction", "Ocean waves"]],
-      ["Soil texture", "The relative proportions of sand, silt, and clay", ["Soil color only", "Groundwater depth", "Earthworm number"]],
-      ["Sand", "The largest mineral particle size among sand, silt, and clay", ["The smallest particle", "A type of organic matter", "A dissolved nutrient"]],
-      ["Clay", "The smallest mineral particle size among sand, silt, and clay", ["The largest particle", "A gravel fragment", "A type of crop"]],
-      ["Soil structure", "The arrangement of soil particles into aggregates", ["The market value of soil", "The formula of water", "The number of farm workers"]],
-      ["Humus", "Relatively stable organic matter formed through decomposition", ["A mineral fertilizer", "A type of sand", "A pesticide"]],
-      ["Soil pH", "A measure of soil acidity or alkalinity", ["Soil depth only", "Sand percentage only", "Crop price"]],
-      ["Acidic soil", "Soil with a pH below 7 under the usual pH scale", ["Neutral soil", "Alkaline soil", "Soil without minerals"]],
-      ["Neutral soil pH", "Approximately pH 7", ["pH 2", "pH 5", "pH 12"]],
-      ["Water-holding capacity", "Is strongly influenced by soil texture and structure", ["Depends only on fence color", "Depends only on seed price", "Depends only on tree height"]],
-      ["Soil porosity", "The proportion of soil volume occupied by pores", ["The quantity of grain produced", "Leaf nitrogen percentage", "Fertilizer price"]],
-      ["Bulk density", "Dry soil mass per unit of bulk soil volume", ["The total mass of a farm", "Daily rainfall", "The number of pores alone"]],
-      ["Clay-rich soil", "Often holds more water per unit volume than coarse sand, depending on structure", ["Always holds no water", "Always drains instantly", "Is identical to bedrock"]],
-      ["Soil erosion", "The detachment and transport of soil by water, wind, or other forces", ["Mineral formation only", "An increase in soil depth everywhere", "Organic matter addition"]],
-      ["Contour farming", "A practice that can reduce water erosion on sloping land", ["Plowing directly downhill", "Removing all vegetation", "Leaving soil bare"]],
-      ["Conservation tillage", "Tillage that retains substantial crop residues and limits soil disturbance", ["Removing all residues", "Burning every field", "Preventing crop rotation"]],
-      ["Soil organic matter", "Can improve structure, nutrient cycling, and water retention", ["Always increases salinity", "Replaces every mineral nutrient", "Prevents every form of erosion"]],
-      ["Soil microorganisms", "Participate in decomposition and many soil nutrient transformations", ["Only cause harm", "Have no effect on soil", "Are all plant roots"]],
-      ["Nitrogen fixation", "Conversion of atmospheric nitrogen into biologically usable nitrogen compounds", ["Loss of all soil nitrogen", "Removal of phosphorus from rock", "Evaporation of soil water"]],
-      ["Atmospheric nitrogen", "Makes up most of Earth's atmosphere", ["Oxygen", "Carbon dioxide", "Hydrogen"]],
-      ["Phosphorus in plants", "Is important in energy transfer and root development", ["A soil animal", "A pesticide", "A type of irrigation"]],
-      ["Nitrogen in plants", "Is important in proteins and many compounds needed for growth", ["Gold", "Mercury", "Silver"]],
-      ["Cation exchange capacity", "Describes a soil's capacity to retain and exchange positively charged ions", ["Crop emergence coefficient", "Carbon evaporation cycle", "Clay erosion category"]],
-      ["High CEC", "Generally indicates greater capacity to retain and exchange cations", ["No charged particles", "No possibility of acidity", "No nutrient-holding ability"]],
-      ["Leaching", "The downward movement of dissolved substances through soil with water", ["Aggregate formation", "Root movement toward light", "Seed storage"]],
-      ["Soil salinity", "The accumulation of soluble salts to levels that may harm plants", ["Excess organic matter only", "The absence of all minerals", "Normal humus formation"]],
-      ["Soil compaction", "Compression that reduces pore space and can restrict roots and water movement", ["An increase in porosity in all cases", "Compost addition", "Crop canopy formation"]],
-      ["Compaction prevention", "Avoiding unnecessary machinery traffic, especially on wet soil", ["Driving heavy machinery over wet soil repeatedly", "Removing all organic matter", "Flooding fields continuously"]],
-      ["O horizon", "The surface organic layer in soil profiles where present", ["Unweathered bedrock", "The deepest groundwater layer", "A crop canopy"]],
-      ["A horizon", "The mineral topsoil horizon, often enriched with organic matter", ["Bedrock", "Atmosphere", "Unweathered rock only"]],
-      ["B horizon", "A subsoil horizon where materials such as clay or iron may accumulate", ["Freshly fallen leaves only", "The atmosphere", "Unweathered bedrock in every soil"]],
-      ["Parent material", "The material from which soil develops", ["A crop canopy", "A fertilizer bag", "A soil organism"]],
-      ["Weathering", "The breakdown and alteration of rocks and minerals", ["Product marketing", "Animal breeding", "Crop harvesting"]],
-      ["Physical weathering", "Breakdown of rock through processes such as freeze-thaw action", ["Oxidation only", "Hydrolysis only", "Chemical dissolution only"]],
-      ["Field capacity", "The soil-water condition after excess gravitational water has drained", ["Maximum fertilizer purchasing capacity", "The volume of bedrock", "The percentage of clay alone"]],
-      ["Permanent wilting point", "The soil-water condition at which plants cannot recover from wilting under specified conditions", ["Soil saturation", "A fertilizer limit", "The water content of manure"]],
-      ["Available water capacity", "The difference between water content at field capacity and permanent wilting point", ["Annual rainfall", "Water in large pores only", "Dry soil mass"]],
-      ["Infiltration", "The entry of water into the soil surface", ["Fertilizer loss from a warehouse", "Seed movement upward", "Leaf evaporation"]],
-      ["Percolation", "The downward movement of water through soil", ["Pollen transfer", "Residue decomposition only", "Grain harvesting"]],
-      ["Irrigation scheduling", "Determining when and how much water crops should receive", ["Applying water at random", "Preventing all rainfall", "Watering only after harvest"]],
-      ["Soil acidification", "Can occur through leaching of basic cations and processes such as nitrification", ["Earthworms alone", "Clean water in every case", "Sand particles alone"]],
-      ["Agricultural lime", "A common amendment used to raise the pH of acidic soil", ["Elemental sulfur", "Strong acid", "Ammonium sulfate in every situation"]],
-      ["Soil fertility", "The soil's ability to supply essential nutrients in suitable amounts and balance", ["Market value only", "Sand content alone", "River depth"]],
-      ["Soil productivity", "The ability of soil to produce crops under given management and environmental conditions", ["The number of soil particles", "The amount of gravel alone", "Rainfall acidity only"]],
-      ["Soil testing", "Assessing nutrient status to help guide fertilizer recommendations", ["Determining a farmer's age", "Measuring livestock gestation", "Directly determining rice prices"]],
-      ["Composting", "Decomposing organic materials into a more stable soil amendment", ["Increasing waste indefinitely", "Sterilizing soil permanently", "Removing every nutrient"]],
-      ["Green manure", "Plant material grown and incorporated into soil to improve its condition", ["A synthetic pesticide", "An irrigation pipe", "A mineral without organic material"]],
-      ["Maintaining soil organic matter", "Returning suitable residues and adding compost or manure", ["Burning all residues", "Leaving soil exposed to erosion", "Removing all biomass"]],
-      ["Soil classification", "Systematically grouping soils according to their properties", ["Grading farm produce", "Selecting animal breeds", "Pricing fertilizer"]]
-    ]
+  "Animal Science": {
+    icon: "🐄",
+    description: "Animal nutrition, breeding, physiology, and production."
+  },
+  "Crop Science": {
+    icon: "🌾",
+    description: "Crop production, plant growth, and field management."
+  },
+  "Crop Protection": {
+    icon: "🛡️",
+    description: "Plant diseases, insect pests, weeds, and integrated control."
+  },
+  "Agricultural Extension and Management": {
+    icon: "👨‍🌾",
+    description: "Extension methods, communication, leadership, and farm management."
+  },
+  "Agricultural Economics and Marketing": {
+    icon: "📈",
+    description: "Farm economics, budgeting, market structures, and agricultural marketing."
   }
-];
+};
 
-// Build 50 multiple-choice questions for every subject.
-// Each concept creates one definition question and one application question.
-// The bank contains exactly 50 questions per subject.
+// Utility functions
+const $ = (id) => document.getElementById(id);
 
-function makeQuestions(concepts, subjectId) {
-  const questions = [];
+function shuffle(items) {
+  const result = [...items];
 
-  for (let i = 0; i < 50; i++) {
-    const concept = concepts[i];
-    const distractors = [
-      concept[2][0],
-      concept[2][1],
-      concept[2][2]
-    ];
-
-    // Rotate answer position so the correct answer is not always A.
-    const correctPosition = (i * 3 + subjectId) % 4;
-    const options = [];
-    let distractorIndex = 0;
-
-    for (let position = 0; position < 4; position++) {
-      if (position === correctPosition) {
-        options.push(concept[1]);
-      } else {
-        options.push(distractors[distractorIndex++]);
-      }
-    }
-
-    const questionText = i % 2 === 0
-      ? `What is the primary meaning or function of ${concept[0]}?`
-      : `Which statement best describes ${concept[0]}?`;
-
-    questions.push({
-      id: i + 1,
-      question: questionText,
-      options,
-      answer: correctPosition,
-      explanation: concept[1]
-    });
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
   }
 
-  return questions;
+  return result;
 }
 
-const quizData = subjectDefinitions.map((subject) => ({
-  id: subject.id,
-  name: subject.name,
-  icon: subject.icon,
-  questions: makeQuestions(subject.concepts, subject.id)
-}));
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, (char) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
 
-// Short subject reviewers.
-const reviewerData = [
+// Build the six subjects and their 300 multiple-choice questions
+const subjects = Object.entries(questionBank).map(([name, concepts]) => {
+  const questions = concepts.map(([term, definition], index) => {
+    const distractors = shuffle(
+      concepts
+        .filter((_, i) => i !== index)
+        .map((item) => item[1])
+    ).slice(0, 3);
+
+    const choices = shuffle([definition, ...distractors]);
+
+    return {
+      q: `Which statement best defines "${term}"?`,
+      choices,
+      answer: choices.indexOf(definition),
+      explain: `${term}: ${definition}.`
+    };
+  });
+
+  return {
+    name,
+    description: subjectInfo[name].description,
+    icon: subjectInfo[name].icon,
+    questions
+  };
+});
+
+// Reviewer notes
+const reviewers = [
   {
-    title: "Agricultural Extension and Communication",
-    notes: [
-      "Extension connects agricultural research and practical knowledge with farmers' needs.",
-      "Common methods include farm visits, demonstrations, field days, group discussions, and mass media.",
-      "Good communication requires a clear message, suitable channel, active listening, and feedback.",
-      "Program planning begins with identifying needs, setting objectives, selecting activities, and evaluating results."
-    ]
-  },
-  {
-    title: "Agricultural Economics and Marketing",
-    notes: [
-      "Opportunity cost is the value of the next-best alternative forgone.",
-      "Profit equals total revenue minus total cost. Gross margin commonly equals revenue minus variable costs.",
-      "Supply, demand, market equilibrium, elasticity, and production costs influence farm decisions.",
-      "Grading, storage, transport, processing, and market information are important marketing functions."
-    ]
+    title: "Soil Science",
+    text: "Review soil texture, structure, pH, cation exchange capacity, nutrient availability, soil horizons, and erosion control. Remember that soil texture depends on the relative proportions of sand, silt, and clay."
   },
   {
     title: "Animal Science",
-    notes: [
-      "Animal production involves nutrition, breeding, reproduction, housing, health, and welfare.",
-      "Ruminants such as cattle have four stomach compartments: rumen, reticulum, omasum, and abomasum.",
-      "A balanced ration supplies nutrients in appropriate amounts. Clean water is essential.",
-      "Biosecurity, vaccination programs, sanitation, and suitable housing help protect livestock health."
-    ]
-  },
-  {
-    title: "Crop Protection",
-    notes: [
-      "Crop protection manages weeds, insect pests, plant diseases, and other harmful organisms.",
-      "Integrated pest management combines monitoring, cultural, biological, physical, and appropriate chemical methods.",
-      "Accurate identification and regular scouting help determine whether control is needed.",
-      "Always follow pesticide labels, protective-equipment requirements, and local safety regulations."
-    ]
+    text: "Focus on digestion, feed nutrients, breeding systems, reproductive physiology, animal health, and production management. Distinguish energy, protein, minerals, and vitamins by their primary functions."
   },
   {
     title: "Crop Science",
-    notes: [
-      "Photosynthesis converts light energy into chemical energy using carbon dioxide and water.",
-      "Roots absorb water and nutrients; xylem transports water, while phloem transports sugars and other organic substances.",
-      "Crop rotation, proper spacing, seed quality, irrigation, and suitable varieties support production.",
-      "Nitrogen, phosphorus, and potassium are primary plant macronutrients."
-    ]
+    text: "Study seed quality, germination, plant growth, crop rotation, irrigation, nutrient management, and harvesting. Understand the difference between vegetative growth and reproductive development."
   },
   {
-    title: "Soil Science",
-    notes: [
-      "Soil texture describes the relative proportions of sand, silt, and clay; structure describes their arrangement.",
-      "Soil organic matter supports aggregation, nutrient cycling, and water retention.",
-      "Soil pH influences nutrient availability. Agricultural lime is commonly used to raise acidic soil pH.",
-      "Contour farming, residue cover, cover crops, and suitable tillage can help reduce erosion."
-    ]
+    title: "Crop Protection",
+    text: "Review pest identification, disease symptoms, pathogen transmission, weed competition, pesticide safety, biological control, and integrated pest management. Correct identification should come before selecting a control method."
+  },
+  {
+    title: "Agricultural Extension and Management",
+    text: "Review extension communication, adoption of innovations, participatory methods, project planning, monitoring, evaluation, leadership, and farm records. Separate project inputs, outputs, outcomes, and impacts."
+  },
+  {
+    title: "Agricultural Economics and Marketing",
+    text: "Study supply and demand, opportunity cost, production costs, farm budgeting, elasticity, market structures, marketing margins, and value addition. Practice distinguishing fixed costs from variable costs."
   }
 ];
 
-// Local storage helpers.
-const STORAGE_KEY = "bsaReviewApp_v2";
+// Local storage
+const STORAGE_KEY = "bsareview_app_data_v1";
 
-function loadState() {
+function loadData() {
   try {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    return saved ? JSON.parse(saved) : {};
-  } catch (error) {
-    console.warn("Could not load saved progress.", error);
-    return {};
+    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {
+      answered: 0,
+      correct: 0,
+      history: [],
+      notes: ""
+    };
+  } catch {
+    return {
+      answered: 0,
+      correct: 0,
+      history: [],
+      notes: ""
+    };
   }
 }
 
-const savedState = loadState();
+let appData = loadData();
 
-const state = {
-  page: "home",
-  subjectId: null,
-  questionIndex: 0,
-  selectedAnswer: null,
-  checked: false,
-  answers: {},
-  answeredQuestions: savedState.answeredQuestions || {},
-  history: Array.isArray(savedState.history) ? savedState.history : [],
-  notes: savedState.notes || ""
-};
-
-function saveState() {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({
-      answeredQuestions: state.answeredQuestions,
-      history: state.history,
-      notes: state.notes
-    }));
-  } catch (error) {
-    console.warn("Could not save progress.", error);
-  }
+function saveData() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
 }
 
-function $(id) {
-  return document.getElementById(id);
+function accuracy() {
+  return appData.answered
+    ? Math.round((appData.correct / appData.answered) * 100)
+    : 0;
 }
 
-// Render subject cards.
-function renderSubjects() {
-  const container = $("subjects");
+// Current quiz state
+let currentSubject = null;
+let currentQuestions = [];
+let questionIndex = 0;
+let quizCorrect = 0;
+let selectedAnswer = null;
+let questionChecked = false;
 
-  container.innerHTML = quizData.map((subject) => `
-    <button class="subject" type="button"
-      data-subject-id="${subject.id}">
-      <div class="subject-content">
-        <strong>${subject.name}</strong>
-        <small>${subject.questions.length} practice questions</small>
-      </div>
-      <span class="subject-icon" aria-hidden="true">${subject.icon}</span>
-    </button>
-  `).join("");
-
-  container.querySelectorAll("[data-subject-id]").forEach((button) => {
-    button.addEventListener("click", () => {
-      startQuiz(Number(button.dataset.subjectId));
-    });
-  });
-}
-
-// Navigation.
+// Page navigation
 function showPage(pageName) {
-  const allowedPages = ["home", "quiz", "notes", "scores"];
-  if (!allowedPages.includes(pageName)) return;
-
-  state.page = pageName;
-
-  document.querySelectorAll(".page").forEach((page) => {
-    page.classList.toggle("hidden", page.id !== pageName);
-  });
-
-  document.querySelectorAll(".tab").forEach((tab) => {
-    const active = tab.dataset.page === pageName;
-    tab.classList.toggle("active", active);
-
-    if (active) {
-      tab.setAttribute("aria-current", "page");
-    } else {
-      tab.removeAttribute("aria-current");
+  ["home", "quiz", "notes", "scores"].forEach((page) => {
+    const element = $(page);
+    if (element) {
+      element.style.display = page === pageName ? "" : "none";
     }
   });
 
+  document.querySelectorAll("[data-page]").forEach((tab) => {
+    const active = tab.dataset.page === pageName;
+    tab.classList.toggle("active", active);
+    tab.setAttribute("aria-current", active ? "page" : "false");
+  });
+
   if (pageName === "scores") renderScores();
-  if (pageName === "notes") renderReviewers();
-  updateStats();
+  if (pageName === "notes") loadNotes();
+  if (pageName === "home") renderSubjects();
 
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-document.querySelectorAll(".tab").forEach((tab) => {
-  tab.addEventListener("click", () => {
-    showPage(tab.dataset.page);
+// Render subject cards
+function renderSubjects() {
+  const container = $("subjects");
+  if (!container) return;
+
+  container.innerHTML = subjects.map((subject, index) => `
+    <button class="subject-card" type="button" data-subject="${index}">
+      <span class="subject-icon">${subject.icon}</span>
+      <span class="subject-name">${escapeHTML(subject.name)}</span>
+      <span class="subject-description">${escapeHTML(subject.description)}</span>
+      <span class="subject-count">${subject.questions.length} practice questions</span>
+    </button>
+  `).join("");
+
+  container.querySelectorAll("[data-subject]").forEach((button) => {
+    button.addEventListener("click", () => {
+      startQuiz(Number(button.dataset.subject));
+    });
   });
-});
+}
 
-// Quiz state.
-function startQuiz(subjectId) {
-  const subject = quizData.find((item) => item.id === subjectId);
-  if (!subject) return;
+// Start a quiz for a chosen subject
+function startQuiz(subjectIndex) {
+  currentSubject = subjects[subjectIndex];
+  currentQuestions = shuffle(currentSubject.questions);
+  questionIndex = 0;
+  quizCorrect = 0;
+  selectedAnswer = null;
+  questionChecked = false;
 
-  state.subjectId = subjectId;
-  state.questionIndex = 0;
-  state.selectedAnswer = null;
-  state.checked = false;
-  state.answers = {};
+  const subjectTitle = $("quizSubject");
+  const quizTitle = $("quizTitle");
 
-  $("quizSubject").textContent = subject.name.toUpperCase();
-  $("quizTitle").textContent = subject.name;
+  if (subjectTitle) subjectTitle.textContent = currentSubject.name;
+  if (quizTitle) quizTitle.textContent = "Practice Quiz";
 
   showPage("quiz");
   renderQuestion();
 }
 
-function currentSubject() {
-  return quizData.find((item) => item.id === state.subjectId);
+// Display the current question
+function renderQuestion() {
+  if (!currentSubject || !currentQuestions.length) return;
+
+  const question = currentQuestions[questionIndex];
+
+  selectedAnswer = null;
+  questionChecked = false;
+
+  if ($("questionProgress")) {
+    $("questionProgress").textContent =
+      `Question ${questionIndex + 1} of ${currentQuestions.length}`;
+  }
+
+  if ($("progressBar")) {
+    $("progressBar").style.width =
+      `${((questionIndex + 1) / currentQuestions.length) * 100}%`;
+  }
+
+  if ($("questionText")) {
+    $("questionText").textContent = question.q;
+  }
+
+  const choicesContainer = $("choices");
+
+  if (choicesContainer) {
+    choicesContainer.innerHTML = question.choices.map((choice, index) => `
+      <button class="choice" type="button" data-choice="${index}">
+        <span class="choice-letter">${String.fromCharCode(65 + index)}.</span>
+        <span>${escapeHTML(choice)}</span>
+      </button>
+    `).join("");
+
+    choicesContainer.querySelectorAll("[data-choice]").forEach((button) => {
+      button.addEventListener("click", () => selectChoice(Number(button.dataset.choice)));
+    });
+  }
+
+  const feedback = $("feedback");
+  if (feedback) {
+    feedback.textContent = "";
+    feedback.style.display = "none";
+    feedback.className = "";
+  }
+
+  const nextButton = $("nextQuestion");
+  if (nextButton) {
+    nextButton.disabled = true;
+    nextButton.textContent =
+      questionIndex === currentQuestions.length - 1 ? "Finish Quiz" : "Next Question";
+  }
 }
 
-function renderQuestion() {
-  const subject = currentSubject();
-  if (!subject) return;
+// Select an answer
+function selectChoice(index) {
+  if (questionChecked) return;
 
-  const question = subject.questions[state.questionIndex];
-  if (!question) return;
+  selectedAnswer = index;
 
-  state.selectedAnswer = null;
-  state.checked = false;
-
-  $("questionText").textContent = question.question;
-  $("questionProgress").textContent =
-    `Question ${state.questionIndex + 1} of ${subject.questions.length}`;
-
-  $("progressBar").style.width =
-    `${(state.questionIndex / subject.questions.length) * 100}%`;
-
-  $("feedback").textContent = "";
-
-  $("choices").innerHTML = question.options.map((option, index) => `
-    <button class="choice" type="button" data-choice="${index}">
-      <strong>${String.fromCharCode(65 + index)}.</strong>
-      ${option}
-    </button>
-  `).join("");
-
-  $("choices").querySelectorAll(".choice").forEach((button) => {
-    button.addEventListener("click", () => {
-      if (state.checked) return;
-
-      state.selectedAnswer = Number(button.dataset.choice);
-
-      $("choices").querySelectorAll(".choice").forEach((choice) => {
-        choice.classList.toggle(
-          "selected",
-          Number(choice.dataset.choice) === state.selectedAnswer
-        );
-      });
-
-      $("nextQuestion").disabled = false;
-      $("nextQuestion").textContent = "Check answer";
-    });
+  document.querySelectorAll("#choices [data-choice]").forEach((button) => {
+    button.classList.toggle("selected", Number(button.dataset.choice) === index);
   });
 
-  $("nextQuestion").disabled = true;
-  $("nextQuestion").textContent = "Select an answer";
+  // Check the selected answer immediately
+  checkAnswer();
 }
 
-function checkCurrentAnswer() {
-  const subject = currentSubject();
-  if (!subject) return;
+// Check and explain the answer
+function checkAnswer() {
+  if (questionChecked || selectedAnswer === null) return;
 
-  const question = subject.questions[state.questionIndex];
-  const correct = state.selectedAnswer === question.answer;
+  questionChecked = true;
 
-  state.checked = true;
-  state.answers[question.id] = {
-    selected: state.selectedAnswer,
-    correct
-  };
+  const question = currentQuestions[questionIndex];
+  const isCorrect = selectedAnswer === question.answer;
 
-  // Store each answered question once for overall statistics.
-  const answerKey = `${subject.id}_${question.id}`;
+  appData.answered += 1;
 
-  state.answeredQuestions[answerKey] = {
-    subjectId: subject.id,
-    questionId: question.id,
-    correct
-  };
+  if (isCorrect) {
+    quizCorrect += 1;
+    appData.correct += 1;
+  }
 
-  $("choices").querySelectorAll(".choice").forEach((button) => {
+  saveData();
+
+  document.querySelectorAll("#choices [data-choice]").forEach((button) => {
     const index = Number(button.dataset.choice);
     button.disabled = true;
 
     if (index === question.answer) {
       button.classList.add("correct");
-    } else if (index === state.selectedAnswer && !correct) {
-      button.classList.add("wrong");
+    } else if (index === selectedAnswer && !isCorrect) {
+      button.classList.add("incorrect");
     }
   });
 
-  $("feedback").textContent = correct
-    ? `Correct! ${question.explanation}`
-    : `Not quite. Correct answer: ${question.options[question.answer]}. ${question.explanation}`;
+  const feedback = $("feedback");
 
-  $("progressBar").style.width =
-    `${((state.questionIndex + 1) / subject.questions.length) * 100}%`;
+  if (feedback) {
+    feedback.style.display = "block";
+    feedback.className = isCorrect ? "feedback correct" : "feedback incorrect";
+    feedback.textContent =
+      `${isCorrect ? "Correct!" : "Not quite."} ${question.explain}`;
+  }
 
-  $("nextQuestion").textContent =
-    state.questionIndex === subject.questions.length - 1
-      ? "Finish quiz"
-      : "Next question";
+  const nextButton = $("nextQuestion");
+  if (nextButton) nextButton.disabled = false;
 
-  saveState();
-  updateStats();
+  updateDashboard();
 }
 
-function finishQuiz() {
-  const subject = currentSubject();
-  if (!subject) return;
+// Move to the next question or finish
+function nextQuestion() {
+  if (!questionChecked) return;
 
-  const results = Object.values(state.answers);
-  const correct = results.filter((answer) => answer.correct).length;
-  const total = results.length;
+  if (questionIndex < currentQuestions.length - 1) {
+    questionIndex += 1;
+    renderQuestion();
+    return;
+  }
 
-  state.history.unshift({
-    subjectId: subject.id,
-    subjectName: subject.name,
-    score: correct,
-    total,
-    accuracy: total ? Math.round((correct / total) * 100) : 0,
-    date: new Date().toISOString()
+  const percentage = Math.round(
+    (quizCorrect / currentQuestions.length) * 100
+  );
+
+  appData.history.unshift({
+    subject: currentSubject.name,
+    date: new Date().toLocaleString(),
+    correct: quizCorrect,
+    total: currentQuestions.length,
+    percentage
   });
 
-  state.history = state.history.slice(0, 50);
-  saveState();
+  // Keep the latest 50 quiz results
+  appData.history = appData.history.slice(0, 50);
+  saveData();
 
-  $("quizSubject").textContent = "QUIZ COMPLETED";
-  $("quizTitle").textContent = "Well done!";
-  $("questionProgress").textContent =
-    `${subject.name} · ${correct} of ${total} correct`;
+  const questionText = $("questionText");
+  if (questionText) {
+    questionText.textContent =
+      `Quiz complete! You scored ${quizCorrect} out of ${currentQuestions.length} (${percentage}%).`;
+  }
 
-  $("questionText").textContent =
-    `Your score is ${correct}/${total} (${total ? Math.round(correct / total * 100) : 0}%).`;
+  if ($("choices")) $("choices").innerHTML = "";
 
-  $("choices").innerHTML = "";
-  $("feedback").textContent =
-    "Your results have been saved on this device.";
+  if ($("feedback")) {
+    $("feedback").style.display = "block";
+    $("feedback").className = "feedback";
+    $("feedback").textContent =
+      percentage >= 80
+        ? "Great work! Keep reviewing to maintain your performance."
+        : "Keep practicing. Review the explanations and try again.";
+  }
 
-  $("progressBar").style.width = "100%";
-  $("nextQuestion").disabled = false;
-  $("nextQuestion").textContent = "Back to subjects";
+  if ($("questionProgress")) {
+    $("questionProgress").textContent = "Quiz completed";
+  }
 
-  $("nextQuestion").onclick = () => {
-    $("nextQuestion").onclick = null;
-    state.subjectId = null;
-    showPage("home");
-  };
+  if ($("progressBar")) $("progressBar").style.width = "100%";
 
-  updateStats();
+  const nextButton = $("nextQuestion");
+  if (nextButton) {
+    nextButton.disabled = false;
+    nextButton.textContent = "Back to Subjects";
+    nextButton.onclick = () => showPage("home");
+  }
+
+  updateDashboard();
 }
 
-$("nextQuestion").addEventListener("click", () => {
-  if (!state.subjectId) {
-    showPage("home");
-    return;
-  }
-
-  if (!state.checked) {
-    if (state.selectedAnswer === null) return;
-    checkCurrentAnswer();
-    return;
-  }
-
-  const subject = currentSubject();
-
-  if (state.questionIndex < subject.questions.length - 1) {
-    state.questionIndex++;
-    renderQuestion();
-  } else {
-    finishQuiz();
-  }
-});
-
-$("backSubjects").addEventListener("click", () => {
-  state.subjectId = null;
-  $("nextQuestion").onclick = null;
-  showPage("home");
-});
-
-// Statistics count each question once across the six subjects.
-function updateStats() {
-  const records = Object.values(state.answeredQuestions);
-  const answered = records.length;
-  const correct = records.filter((item) => item.correct).length;
-  const accuracy = answered ? Math.round((correct / answered) * 100) : 0;
-
-  $("answered").textContent = answered;
-  $("correct").textContent = correct;
-  $("accuracy").textContent = `${accuracy}%`;
-
-  $("scoreAnswered").textContent = answered;
-  $("scoreCorrect").textContent = correct;
-  $("scoreAccuracy").textContent = `${accuracy}%`;
-}
-
-// Reviewers.
+// Render reviewer cards
 function renderReviewers() {
-  $("reviewers").innerHTML = reviewerData.map((reviewer) => `
-    <article class="reviewer">
-      <h3>${reviewer.title}</h3>
-      ${reviewer.notes.map((note) => `<p>${note}</p>`).join("<br>")}
-    </article>
-  `).join("");
+  const container = $("reviewers");
+  if (!container) return;
 
-  $("personalNotes").value = state.notes;
+  container.innerHTML = reviewers.map((reviewer) => `
+    <details class="reviewer-card">
+      <summary>${escapeHTML(reviewer.title)}</summary>
+      <p>${escapeHTML(reviewer.text)}</p>
+    </details>
+  `).join("");
 }
 
-$("saveNotes").addEventListener("click", () => {
-  state.notes = $("personalNotes").value;
-  saveState();
+// Personal notes
+function loadNotes() {
+  const notesField = $("personalNotes");
+  if (notesField && notesField.value === "") {
+    notesField.value = appData.notes || "";
+  }
+}
 
-  $("notesMessage").textContent = "Your notes have been saved.";
-  window.setTimeout(() => {
-    $("notesMessage").textContent = "";
-  }, 2500);
-});
+function saveNotes() {
+  const notesField = $("personalNotes");
+  if (!notesField) return;
 
-// Score history.
+  appData.notes = notesField.value;
+  saveData();
+
+  if ($("notesMessage")) {
+    $("notesMessage").textContent = "Notes saved on this device.";
+  }
+}
+
+// Score dashboard
+function updateDashboard() {
+  if ($("answered")) $("answered").textContent = appData.answered;
+  if ($("correct")) $("correct").textContent = appData.correct;
+  if ($("accuracy")) $("accuracy").textContent = `${accuracy()}%`;
+
+  if ($("scoreAnswered")) $("scoreAnswered").textContent = appData.answered;
+  if ($("scoreCorrect")) $("scoreCorrect").textContent = appData.correct;
+  if ($("scoreAccuracy")) $("scoreAccuracy").textContent = `${accuracy()}%`;
+}
+
 function renderScores() {
-  updateStats();
+  updateDashboard();
 
-  if (!state.history.length) {
-    $("history").innerHTML =
-      '<p class="empty-message">No completed quizzes yet. Choose a subject and start practicing!</p>';
+  const historyContainer = $("history");
+  if (!historyContainer) return;
+
+  if (!appData.history.length) {
+    historyContainer.innerHTML = "<p>No completed quizzes yet. Choose a subject and start practicing.</p>";
     return;
   }
 
-  $("history").innerHTML = state.history.map((attempt) => {
-    const subject = quizData.find(
-      (item) => item.id === attempt.subjectId
-    );
-
-    const date = new Date(attempt.date);
-    const dateLabel = Number.isNaN(date.getTime())
-      ? ""
-      : date.toLocaleDateString();
-
-    return `
-      <div class="history-item">
-        <strong>${subject ? subject.name : attempt.subjectName}</strong>
-        <span>${attempt.score}/${attempt.total} correct · ${attempt.accuracy}%</span>
-        <div class="muted">${dateLabel}</div>
-      </div>
-    `;
-  }).join("");
+  historyContainer.innerHTML = appData.history.map((result) => `
+    <div class="history-item">
+      <strong>${escapeHTML(result.subject)}</strong>
+      <span>${result.correct}/${result.total} correct (${result.percentage}%)</span>
+      <small>${escapeHTML(result.date)}</small>
+    </div>
+  `).join("");
 }
 
-$("resetScores").addEventListener("click", () => {
+function resetScores() {
   const confirmed = window.confirm(
-    "Reset all saved quiz progress and score history? This cannot be undone."
+    "Reset your quiz scores and history? Your personal notes will be kept."
   );
 
   if (!confirmed) return;
 
-  state.answeredQuestions = {};
-  state.history = {};
-  state.history = [];
-  state.answers = {};
+  appData.answered = 0;
+  appData.correct = 0;
+  appData.history = [];
 
-  saveState();
-  updateStats();
+  saveData();
+  updateDashboard();
   renderScores();
-});
+}
 
-// Start the application.
-function initApp() {
-  // The Telegram Web App integration is optional.
-  try {
-    if (window.Telegram && window.Telegram.WebApp) {
-      window.Telegram.WebApp.ready();
-      window.Telegram.WebApp.expand();
-    }
-  } catch (error) {
-    console.warn("Telegram integration unavailable.", error);
+// Connect the interface
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("[data-page]").forEach((tab) => {
+    tab.addEventListener("click", () => showPage(tab.dataset.page));
+  });
+
+  if ($("nextQuestion")) {
+    $("nextQuestion").addEventListener("click", () => {
+      if ($("nextQuestion").textContent === "Back to Subjects") {
+        showPage("home");
+      } else {
+        nextQuestion();
+      }
+    });
+  }
+
+  if ($("saveNotes")) {
+    $("saveNotes").addEventListener("click", saveNotes);
+  }
+
+  if ($("resetScores")) {
+    $("resetScores").addEventListener("click", resetScores);
+  }
+
+  if ($("backSubjects")) {
+    $("backSubjects").addEventListener("click", () => showPage("home"));
   }
 
   renderSubjects();
   renderReviewers();
-  updateStats();
+  updateDashboard();
+
   showPage("home");
-}
-
-initApp();
-
-// Expose the question bank for debugging and future integration.
-window.BSAReview = {
-  subjects: quizData,
-  reviewers: reviewerData
-};
+});
