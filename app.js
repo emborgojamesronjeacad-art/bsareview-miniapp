@@ -471,11 +471,15 @@ let selectedAnswer = null;
 let questionChecked = false;
 
 // Page navigation
+
 function showPage(pageName) {
-  ["home", "quiz", "notes", "scores"].forEach((page) => {
-    const element = $(page);
+  const pages = ["home", "quiz", "notes", "scores"];
+
+  pages.forEach((page) => {
+    const element = document.getElementById(page);
+
     if (element) {
-      element.style.display = page === pageName ? "" : "none";
+      element.style.display = page === pageName ? "block" : "none";
     }
   });
 
@@ -491,6 +495,7 @@ function showPage(pageName) {
 
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
+
 
 // Render subject cards
 function renderSubjects() {
