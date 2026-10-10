@@ -472,14 +472,13 @@ let questionChecked = false;
 
 // Page navigation
 
-function showPage(pageName) {
-  const pages = ["home", "quiz", "notes", "scores"];
 
-  pages.forEach((page) => {
+function showPage(pageName) {
+  ["home", "quiz", "notes", "scores"].forEach((page) => {
     const element = document.getElementById(page);
 
     if (element) {
-      element.style.display = page === pageName ? "block" : "none";
+      element.classList.toggle("hidden", page !== pageName);
     }
   });
 
@@ -492,6 +491,8 @@ function showPage(pageName) {
   if (pageName === "scores") renderScores();
   if (pageName === "notes") loadNotes();
   if (pageName === "home") renderSubjects();
+}
+
 
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
@@ -582,13 +583,13 @@ function renderQuestion() {
     feedback.className = "";
   }
 
-  const nextButton = $("nextQuestion");
-  if (nextButton) {
-    nextButton.disabled = true;
-    nextButton.textContent =
-      questionIndex === currentQuestions.length - 1 ? "Finish Quiz" : "Next Question";
-  }
+  
+const nextButton = $("nextQuestion");
+if (nextButton) {
+  nextButton.disabled = true;
+  nextButton.textContent = "Check answer";
 }
+
 
 // Select an answer
 function selectChoice(index) {
@@ -642,8 +643,16 @@ function checkAnswer() {
       `${isCorrect ? "Correct!" : "Not quite."} ${question.explain}`;
   }
 
-  const nextButton = $("nextQuestion");
-  if (nextButton) nextButton.disabled = false;
+  
+const nextButton = $("nextQuestion");
+if (nextButton) {
+  nextButton.disabled = false;
+  nextButton.textContent =
+    questionIndex === currentQuestions.length - 1
+      ? "Finish Quiz"
+      : "Next Question";
+}
+
 
   updateDashboard();
 }
