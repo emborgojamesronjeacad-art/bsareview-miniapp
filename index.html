@@ -3,9 +3,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="BSA Review - Agriculture practice quizzes and study reviewers">
   <title>BSA Review</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -17,19 +17,17 @@
       <p class="eyebrow">AGRICULTURE REVIEW</p>
       <h1>BSA Review</h1>
     </div>
-    <span class="leaf">✳</span>
+    <span class="leaf" aria-hidden="true">✳</span>
   </header>
 
   <main>
     <section class="welcome">
       <p class="muted">YOUR REVIEW SPACE</p>
       <h2>Learn a little.<br>Improve every day.</h2>
-      <p class="muted">
-        Practice agriculture concepts at your own pace.
-      </p>
+      <p class="muted">Practice agriculture concepts at your own pace.</p>
     </section>
 
-    <section class="stats">
+    <section class="stats" aria-label="Your statistics">
       <div class="stat">
         <span class="muted">Answered</span>
         <strong id="answered">0</strong>
@@ -58,33 +56,35 @@
     </section>
 
     <section id="quiz" class="page hidden">
-      <button id="backSubjects" class="text-button">
-        ← All subjects
-      </button>
+      <button id="backSubjects" class="text-button">← All subjects</button>
+
       <div class="quiz-heading">
         <p class="eyebrow" id="quizSubject">SUBJECT</p>
         <h2 id="quizTitle">Practice quiz</h2>
         <p id="questionProgress" class="muted"></p>
       </div>
+
       <div class="progress-track">
         <div id="progressBar"></div>
       </div>
+
       <article class="question-card">
         <h3 id="questionText">Question</h3>
         <div id="choices" class="choices"></div>
         <p id="feedback" aria-live="polite"></p>
         <button id="nextQuestion" class="primary" disabled>
-          Check answer
+          Select an answer
         </button>
       </article>
     </section>
 
     <section id="notes" class="page hidden">
       <h2 class="section-title">Study reviewers</h2>
-      <p class="muted">Short notes to help you remember key concepts.</p>
+      <p class="muted">Review important concepts from each subject.</p>
       <div id="reviewers" class="reviewer-list"></div>
-      <h3 class="section-title">My notes</h3>
-      <p class="muted">Write your own reminders below.</p>
+
+      <h3 class="section-title personal-title">My notes</h3>
+      <p class="muted">Your personal notes are saved in this browser.</p>
       <textarea id="personalNotes"
         placeholder="Write your study notes here..."></textarea>
       <button id="saveNotes" class="primary">Save my notes</button>
@@ -93,6 +93,7 @@
 
     <section id="scores" class="page hidden">
       <h2 class="section-title">Your progress</h2>
+
       <div class="score-card">
         <p class="muted">Total questions answered</p>
         <strong id="scoreAnswered">0</strong>
@@ -101,11 +102,11 @@
         <p class="muted">Accuracy</p>
         <strong id="scoreAccuracy">0%</strong>
       </div>
-      <h3 class="section-title">Recent attempts</h3>
+
+      <h3 class="section-title history-title">Recent attempts</h3>
       <div id="history"></div>
-      <button id="resetScores" class="secondary">
-        Reset score history
-      </button>
+
+      <button id="resetScores" class="secondary">Reset score history</button>
     </section>
   </main>
 
