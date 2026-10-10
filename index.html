@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <title>BSA Review</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">AGRICULTURE REVIEW</p>
+      <h1>BSA Review</h1>
+    </div>
+    <span class="leaf">✳</span>
+  </header>
+
+  <main>
+    <section class="welcome">
+      <p class="muted">YOUR REVIEW SPACE</p>
+      <h2>Learn a little.<br>Improve every day.</h2>
+      <p class="muted">
+        Practice agriculture concepts at your own pace.
+      </p>
+    </section>
+
+    <section class="stats">
+      <div class="stat">
+        <span class="muted">Answered</span>
+        <strong id="answered">0</strong>
+      </div>
+      <div class="stat">
+        <span class="muted">Correct</span>
+        <strong id="correct">0</strong>
+      </div>
+      <div class="stat">
+        <span class="muted">Accuracy</span>
+        <strong id="accuracy">0%</strong>
+      </div>
+    </section>
+
+    <nav class="tabs" aria-label="Main sections">
+      <button class="tab active" data-page="home">Home</button>
+      <button class="tab" data-page="quiz">Quizzes</button>
+      <button class="tab" data-page="notes">Reviewers</button>
+      <button class="tab" data-page="scores">Scores</button>
+    </nav>
+
+    <section id="home" class="page">
+      <h2 class="section-title">Choose a subject</h2>
+      <p class="muted">Select a subject to start reviewing.</p>
+      <div id="subjects" class="subject-list"></div>
+    </section>
+
+    <section id="quiz" class="page hidden">
+      <button id="backSubjects" class="text-button">
+        ← All subjects
+      </button>
+      <div class="quiz-heading">
+        <p class="eyebrow" id="quizSubject">SUBJECT</p>
+        <h2 id="quizTitle">Practice quiz</h2>
+        <p id="questionProgress" class="muted"></p>
+      </div>
+      <div class="progress-track">
+        <div id="progressBar"></div>
+      </div>
+      <article class="question-card">
+        <h3 id="questionText">Question</h3>
+        <div id="choices" class="choices"></div>
+        <p id="feedback" aria-live="polite"></p>
+        <button id="nextQuestion" class="primary" disabled>
+          Check answer
+        </button>
+      </article>
+    </section>
+
+    <section id="notes" class="page hidden">
+      <h2 class="section-title">Study reviewers</h2>
+      <p class="muted">Short notes to help you remember key concepts.</p>
+      <div id="reviewers" class="reviewer-list"></div>
+      <h3 class="section-title">My notes</h3>
+      <p class="muted">Write your own reminders below.</p>
+      <textarea id="personalNotes"
+        placeholder="Write your study notes here..."></textarea>
+      <button id="saveNotes" class="primary">Save my notes</button>
+      <p id="notesMessage" class="muted" aria-live="polite"></p>
+    </section>
+
+    <section id="scores" class="page hidden">
+      <h2 class="section-title">Your progress</h2>
+      <div class="score-card">
+        <p class="muted">Total questions answered</p>
+        <strong id="scoreAnswered">0</strong>
+        <p class="muted">Correct answers</p>
+        <strong id="scoreCorrect">0</strong>
+        <p class="muted">Accuracy</p>
+        <strong id="scoreAccuracy">0%</strong>
+      </div>
+      <h3 class="section-title">Recent attempts</h3>
+      <div id="history"></div>
+      <button id="resetScores" class="secondary">
+        Reset score history
+      </button>
+    </section>
+  </main>
+
+  <footer>
+    <p>BSA REVIEW · LEARN WITH PURPOSE</p>
+  </footer>
+</body>
+</html>
