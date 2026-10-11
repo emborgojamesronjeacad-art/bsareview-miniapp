@@ -212,7 +212,7 @@ const questionBank = {
     ["Threshold-based spraying", "Applying a pesticide when monitoring indicates pest levels justify intervention"]
   ],
 
-  "Agricultural Extension and Communication": [
+  "Agricultural Extension and Management": [
     ["Agricultural extension", "a process that facilitates learning and change among farmers and rural communities"],
     ["Technology transfer", "the movement of knowledge, practices, or technologies from developers or institutions to users"],
     ["Participatory rural appraisal", "a set of methods that enables local people to analyze their conditions and priorities"],
@@ -340,7 +340,7 @@ const subjectInfo = {
     icon: "🛡️",
     description: "Plant diseases, insect pests, weeds, and integrated control."
   },
-  "Agricultural Extension and Communication": {
+  "Agricultural Extension and Management": {
     icon: "👨‍🌾",
     description: "Extension methods, communication, leadership, and farm management."
   },
@@ -431,7 +431,7 @@ const reviewers = [
     text: "Review pest identification, disease symptoms, pathogen transmission, weed competition, pesticide safety, biological control, and integrated pest management. Correct identification should come before selecting a control method."
   },
   {
-    title: "Agricultural Extension and Communication",
+    title: "Agricultural Extension and Management",
     text: "Review extension communication, adoption of innovations, participatory methods, project planning, monitoring, evaluation, leadership, and farm records. Separate project inputs, outputs, outcomes, and impacts."
   },
   {
