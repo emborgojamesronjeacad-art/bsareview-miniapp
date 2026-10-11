@@ -375,6 +375,17 @@ function escapeHTML(value) {
 }
 
 // Build the six subjects and their 300 multiple-choice questions
+console.log("Question bank loaded:", typeof questionBank);
+console.log("Subject names:", Object.keys(questionBank));
+console.log(
+  "Question counts:",
+  Object.fromEntries(
+    Object.entries(questionBank).map(([name, questions]) => [
+      name,
+      questions.length
+    ])
+  )
+);
 const subjects = Object.entries(questionBank).map(([name, concepts]) => {
   const questions = concepts.map(([term, definition], index) => {
     const distractors = shuffle(
