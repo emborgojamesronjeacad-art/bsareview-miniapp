@@ -482,25 +482,11 @@ let selectedAnswer = null;
 let questionChecked = false;
 
 // Page navigation
+
 function showPage(pageName) {
-  ["home", "quiz", "notes", "scores"].forEach((page) => {
-    const element = $(page);
-    if (element) {
-      element.style.display = page === pageName ? "" : "none";
-    }
+  document.querySelectorAll(".page").forEach((page) => {
+    page.classList.toggle("hidden", page.id !== pageName);
   });
-
-  document.querySelectorAll("[data-page]").forEach((tab) => {
-    const active = tab.dataset.page === pageName;
-    tab.classList.toggle("active", active);
-    tab.setAttribute("aria-current", active ? "page" : "false");
-  });
-
-  if (pageName === "scores") renderScores();
-  if (pageName === "notes") loadNotes();
-  if (pageName === "home") renderSubjects();
-
-  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 // Render subject cards
