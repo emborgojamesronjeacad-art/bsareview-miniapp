@@ -471,14 +471,11 @@ let selectedAnswer = null;
 let questionChecked = false;
 
 // Page navigation
-
-
 function showPage(pageName) {
   ["home", "quiz", "notes", "scores"].forEach((page) => {
-    const element = document.getElementById(page);
-
+    const element = $(page);
     if (element) {
-      element.classList.toggle("hidden", page !== pageName);
+      element.style.display = page === pageName ? "" : "none";
     }
   });
 
@@ -491,12 +488,9 @@ function showPage(pageName) {
   if (pageName === "scores") renderScores();
   if (pageName === "notes") loadNotes();
   if (pageName === "home") renderSubjects();
-}
-
 
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
-
 
 // Render subject cards
 function renderSubjects() {
@@ -583,13 +577,13 @@ function renderQuestion() {
     feedback.className = "";
   }
 
-  
-const nextButton = $("nextQuestion");
-if (nextButton) {
-  nextButton.disabled = true;
-  nextButton.textContent = "Check answer";
+  const nextButton = $("nextQuestion");
+  if (nextButton) {
+    nextButton.disabled = true;
+    nextButton.textContent =
+      questionIndex === currentQuestions.length - 1 ? "Finish Quiz" : "Next Question";
+  }
 }
-
 
 // Select an answer
 function selectChoice(index) {
@@ -643,16 +637,8 @@ function checkAnswer() {
       `${isCorrect ? "Correct!" : "Not quite."} ${question.explain}`;
   }
 
-  
-const nextButton = $("nextQuestion");
-if (nextButton) {
-  nextButton.disabled = false;
-  nextButton.textContent =
-    questionIndex === currentQuestions.length - 1
-      ? "Finish Quiz"
-      : "Next Question";
-}
-
+  const nextButton = $("nextQuestion");
+  if (nextButton) nextButton.disabled = false;
 
   updateDashboard();
 }
