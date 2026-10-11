@@ -340,7 +340,7 @@ const subjectInfo = {
     icon: "🛡️",
     description: "Plant diseases, insect pests, weeds, and integrated control."
   },
-  "Agricultural Extension and Management": {
+  "Agricultural Extension and Communication": {
     icon: "👨‍🌾",
     description: "Extension methods, communication, leadership, and farm management."
   },
