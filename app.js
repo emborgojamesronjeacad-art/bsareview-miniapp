@@ -431,7 +431,7 @@ const reviewers = [
     text: "Review pest identification, disease symptoms, pathogen transmission, weed competition, pesticide safety, biological control, and integrated pest management. Correct identification should come before selecting a control method."
   },
   {
-    title: "Agricultural Extension and Management",
+    title: "Agricultural Extension and Communication",
     text: "Review extension communication, adoption of innovations, participatory methods, project planning, monitoring, evaluation, leadership, and farm records. Separate project inputs, outputs, outcomes, and impacts."
   },
   {
