@@ -212,7 +212,7 @@ const questionBank = {
     ["Threshold-based spraying", "Applying a pesticide when monitoring indicates pest levels justify intervention"]
   ],
 
-  "Agricultural Extension and Management": [
+  "Agricultural Extension and Communication": [
     ["Agricultural extension", "a process that facilitates learning and change among farmers and rural communities"],
     ["Technology transfer", "the movement of knowledge, practices, or technologies from developers or institutions to users"],
     ["Participatory rural appraisal", "a set of methods that enables local people to analyze their conditions and priorities"],
